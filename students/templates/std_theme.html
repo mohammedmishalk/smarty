@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smarty Students</title>
+    {% load static %}
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <i class="bx bxl-c-plus-plus icon"></i>
+            <div class="logo-name">Smarty</div>
+            <i class="bx bx-menu" id="btn1"></i>
+        </div>
+        <ul class="nav-list" style="padding-left:0;">
+            <li>
+                <i class="bx bx-search"> </i>
+                <input type="text" placeholder="Search...">
+                <span class="tooltip">Search</span>
+            </li>
+            <li>
+                <a href="dash">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Dashboard</span>
+                  </a>
+                   <span class="tooltip">Dashboard</span>
+            </li>
+            <li>
+                <a href="userp">
+                  <i class='bx bx-user' ></i>
+                  <span class="links_name">User</span>
+                </a>
+                <span class="tooltip">User</span>
+            </li>
+            <li>
+                <a href="messages">
+                  <i class='bx bx-chat' ></i>
+                  <span class="links_name">Messages</span>
+                </a>
+                <span class="tooltip">Messages</span>
+              </li>
+              <li>
+                <a href="course">
+                  <i class='bx bx-chalkboard'></i>
+                  <span class="links_name">Courses</span>
+                </a>
+                <span class="tooltip">Courses</span>
+              </li>
+              <li>
+                <a href="comp">
+                  <i class='bx bx-trophy' ></i>
+                  <span class="links_name">Competition</span>
+                </a>
+                <span class="tooltip">Competition</span>
+              </li>
+              <li>
+                <a href="books">
+                  <i class='bx bx-book'></i>
+                  <span class="links_name">Books</span>
+                </a>
+                <span class="tooltip">Books</span>
+              </li>
+              <li>
+                <a href="certificates">
+                 <i class='bx bx-id-card'></i>
+                  <span class="links_name">Certificate</span>
+                </a>
+                <span class="tooltip">Certificate</span>
+              </li>
+              <li>
+                <a href="pay">
+                  <i class='bx bxs-backpack'></i>
+                  <span class="links_name">Subscription</span>
+                </a>
+                <span class="tooltip">Subscription</span>
+              </li>
+              <li>
+                <a href="ask">
+                  <i class='bx bx-question-mark'></i>
+                  <span class="links_name">Question</span>
+                </a>
+                <span class="tooltip">Question</span>
+              </li>
+              <li class="profile">
+                <a href="logout">
+                  <div class="profile-details">
+          
+                    <div class="name_job">
+                      <div class="name"><h3 style="margin-left:30px;">log out</h3></div>
+                    </div>
+                  </div>
+                  <i class='bx bx-log-out' id="log_out" ></i></a>
+              </li>
+        </ul>
+    </div>
+    <section class="home-section">
+      {% block content %}
+      
+      {% endblock %}
+    </section>  
+    <script src="{% static 'js/theme.js' %}"></script>
+</body>
+</html>

@@ -10,17 +10,10 @@ class userprofile(models.Model):
     DOB = models.DateField(null=True)
     gender = models.BooleanField(null=True)
     ac_type =models.BooleanField()
+    img = models.ImageField(null=True, blank=True, upload_to="images/" )
+    subtitle = models.CharField(max_length=100,null=True)
+    bio = models.CharField(max_length=500,null=True)
 
-class contact(models.Model):
-    username = models.CharField(max_length=255,null=False,unique=True,primary_key=True)
-    facebook=models.CharField(max_length=500)
-    instagram=models.CharField(max_length=500)
-    twitter=models.CharField(max_length=500)
-    linked_in=models.CharField(max_length=500)
-    youtube=models.CharField(max_length=500)
-    github=models.CharField(max_length=500)
-    gitlab=models.CharField(max_length=500)
-    website=models.CharField(max_length=500)
 
 class usernameConvart(models.Model):
     username = models.CharField(max_length=255,primary_key=True)

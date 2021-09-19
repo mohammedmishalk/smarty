@@ -1,0 +1,108 @@
+{% extends 'std_theme.html' %}
+  {% block content %}
+  {% load static %}
+<head>
+<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{% static 'css/std_edit.css' %}">
+</head>
+<body>
+<div class="content col-12 col-md-10 col-lg-10">
+  <div class="container col-12 col-md-8">
+    <form class="col-12" method="POST" action="edit" enctype="multipart/form-data">
+    {% csrf_token %}
+      <div class="row justify-content-center col-12">
+        <h4>Profile Picture</h4>
+        <div class='file-input'>
+          <input type='file' name="photo">
+          <span id="button" >Choose</span>
+          <span id="label" data-js-label>No file selected</label>
+        </div>
+        <h4> Account</h4>
+          <input type="text" name="name" placeholder="Full Name" required />
+          <input type="email" name="email" placeholder="Email Adress" required />
+          <input type="tel" id="ph" name="ph" placeholder="Phone Number" onblur="phonenumber()" required />
+          <input type="password" name="pass" placeholder="New Password" required />
+          <textarea type="Adress" name="add" placeholder="Current Adress" required></textarea>
+          <input type="text" name="sub" placeholder="Specialization" required />
+          <textarea type="Adress" name="bio" placeholder="add Bio" required></textarea>
+      </div>
+          <div class="row">
+        <div class="col-half">
+          <h4>Date of Birth</h4>
+            <div class="input-group col-12 col-md-6">
+              <div class="col-third col-4 col-md-2">
+                <input type="text" name="dd" placeholder="DD" required />
+              </div>
+              <div class="col-third col-4 col-md-2 ">
+                <input type="text" name="mm" placeholder="MM" required />
+              </div>
+              <div class="col-third col-4 col-md-2">
+                <input type="text" name="yy" placeholder="YYYY" required />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+          <div class="col-half">
+            <h4>Gender</h4>
+              <div class="input-group col-12 col-md-6">
+                <input class="col-3" id="gender-male" type="radio" name="gender" value=True  required />
+                <label class="col-3" for="gender-male"> Male</label>
+                <input class="col-3" id="gender-female" type="radio" name="gender" value=False required />
+                <label class="col-3" for="gender-female"> Female</label>
+              </div>
+          </div>
+          </div>
+          <div class="row justify-content-center col-12">
+          <div class="col-half">
+          <h4>Social accounts</h4>
+            <div class="input-group">
+              <div class="col-third col-12">
+                <input type="text" name="fb" placeholder="facebook"  />
+              </div>
+              <div class="col-third col-12">
+                <input type="text" name="insta" placeholder="instagram"  />
+              </div>
+              <div class="col-third col-12">
+                <input type="text" name="twit" placeholder="twitter" />
+              </div>
+              <div class="col-third col-12">
+                <input type="text" name="in" placeholder="linkedin"  />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-center col-12">
+          <div class="col-half">
+          <h4>Sources</h4>
+            <div class="input-group">
+              <div class="col-third col-12">
+                <input type="text" name="yt" placeholder="youtube" />
+              </div>
+              <div class="col-third col-12">
+                <input type="text" name='hub' placeholder="github" />
+              </div>
+              <div class="col-third col-12">
+                <input type="text" name="lab" placeholder="gitlab" />
+              </div>
+              <div class="col-third col-12">
+                <input type="text" name="web" placeholder="website" />
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      <div class="row justify-content-end">
+        <div class="col-6 col-md-5" style="padding-right: 1.5rem;">
+        <input type="submit" value="Save changes" class="submit_btn" style="background-color: #1d1b31;
+        color: #fff;">
+        </div>
+      </div>
+      </div>
+    </form>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+<script src="{% static 'js/std_edit.js' %}"></script>
+</body>
+    {% endblock %}

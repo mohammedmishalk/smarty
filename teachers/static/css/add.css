@@ -1,0 +1,15 @@
+html {
+    background-color: #E4E9F7;
+}
+
+.add {
+    box-shadow: 0 4px 8px 0 rgb(180, 180, 180);
+}
+.learn {
+    margin-left: 2rem;
+    padding: .3rem;
+    box-shadow: 0 4px 8px 0 rgb(180, 180, 180);
+    float: right;
+
+}
+

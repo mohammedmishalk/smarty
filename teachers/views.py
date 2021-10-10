@@ -6,11 +6,11 @@ from students.models import contact
 
 # Create your views here.
 def dashboard(request, new_username):
-    return render(request,"te_dash.html")
+    return render(request,"card.html")
 
 def userp(request, new_username):
     if request.method == 'GET':
-        return render(request,'tea_acc.html')
+        return render(request,'profile.html')
 
 def ask(request, new_username):
     if request.method == 'GET':
@@ -73,3 +73,6 @@ def  password_update(p,u):
     data = User.objects.get(username=user)
     data.set_password(p)
     data.save()
+
+def add_course(request,new_username):
+    return render(request,"add_course.html")

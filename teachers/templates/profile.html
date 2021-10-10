@@ -1,0 +1,91 @@
+{% extends 'tea_acc.html' %}
+  {% block profile %}
+  {% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+<div class="view">
+	<div class="card-container">
+		<span class="pro">TEACHER</span>
+		<img class="round" src="{{user.img.url}}" alt="user" />
+		<h3>{{user.username}}</h3>
+		<h6>{{user.subtitle}}</h6>
+		<p>{{user.bio}}</p>
+		<div class="buttons">
+			<button class="primary">
+				Message
+			</button>
+			<button class="primary ghost">
+				Following
+			</button>
+		</div>
+		<div class="skills">
+			<h6>Skills</h6>
+			<ul>
+				<li>UI / UX</li>
+				<li>Front End Development</li>
+				<li>HTML</li>
+				<li>CSS</li>
+				<li>JavaScript</li>
+				<li>React</li>
+				<li>Node</li>
+			</ul>
+		</div>
+	</div>
+	<div class="card-container">
+		<form action="" method="POST">
+			<h5>My Account</h5>
+			<label for="icon" class="labelfor">Profile photo</label>
+			<input class="form-control form-account" style="margin-left: 1rem;" type="file" id="formFile">
+			<label for="fname" class="labelfor">Full name</label>
+			<input type="text" name="fname" id="fname" class="form-account" value="{{user.full_name}}" required/>
+			<label for="address" class="labelfor">Current address</label>
+			<textarea name="address" id=area" class="notes" cols="35" rows="4" value="{{user.address}}"></textarea>
+			<label for="dob" class="labelfor">Date of Birth</label>
+			<input type="date" name="dob" id="dob" class="form-account"  required/>
+			<label for="fname" class="labelfor" value="{{user.email}}">Email</label>
+			<input type="emile" name="email" id="email" class="form-account" required/>
+			<label for="password" class="labelfor hidden-pass">Password</label>
+			<input type="password" name="password" id="pas" class="form-account hidden-pass"/>
+			<input type="submit" class="sub" value="Submit">
+			<button class="primary ghost">
+				Reset
+			</button>
+		</form>
+	</div>
+	<div class="card-container">
+		<form action="" method="POST"></form>
+		<div class="top">
+			<h5>Qualificatons</h5>
+			<textarea name="Qualifications" class="notes" rows="8" placeholder="briefly describe your Qualifications..."></textarea>
+		</div>
+		<div class="bottem">
+			<h5>Experience</h5>
+			<textarea name="Experience" class="notes" rows="8" placeholder="briefly describe your Experience..."></textarea>
+		</div>
+		<input type="submit" class="sub" value="Submit">
+			<button class="primary ghost">
+				Reset
+			</button>
+	</div>
+	<div class="card-container">
+		<form action="" method="POST">
+			<h5>Social accounts</h5>
+			<input type="text" name="fb" placeholder="facebook" class="form-account" />
+			<input type="text" name="insta" placeholder="instagram" class="form-account" />
+			<input type="text" name="twit" placeholder="twitter" class="form-account" />
+			<input type="text" name="in" placeholder="linkedin" class="form-account" />
+			<h5 style="margin-top: 1rem;"> Sources</h5>
+			<input type="text" name="yt" placeholder="youtube" class="form-account" />
+			<input type="text" name='hub' placeholder="github" class="form-account"/>
+			<input type="text" name="lab" placeholder="gitlab" class="form-account"/>
+			<input type="text" name="web" placeholder="website" class="form-account"/>
+			<input type="submit" class="sub" value="Submit">
+			<button class="primary ghost">
+				Reset
+			</button>
+
+		</form>	
+
+	</div>
+</div>
+
+{% endblock %}

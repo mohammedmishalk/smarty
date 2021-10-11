@@ -14,7 +14,6 @@ def userp(request, new_username):
         user_data = userdata(user)
         cv_data =cvdata(user)
         contact_data =contactdata(user)
-        print(cv_data)
         return render(request,'profile.html',{"user":user_data,"cv":cv_data,"contact":contact_data,})
 
 def ask(request, new_username):

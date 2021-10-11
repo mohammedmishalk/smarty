@@ -9,8 +9,7 @@ class userprofile(models.Model):
     DOB = models.DateField(null=True)
     ac_type =models.BooleanField()
     img = models.ImageField(null=True, blank=True, upload_to="images/")
-    subtitle = models.CharField(max_length=100,null=True)
-    bio = models.CharField(max_length=500,null=True)
+
 
 
 

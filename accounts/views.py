@@ -2,7 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import auth, User
 from django.contrib import messages
-from . import models
+from .models import usernameConvart,userprofile
+from teachers import models
 
 # Create your views here.
 def home(request):
@@ -15,6 +16,7 @@ def register(request):
         full_name = request.POST['name']
         username = request.POST['username']
         email = request.POST['email']
+        img = "images/example3.jpg"
         password =f"smarty{request.POST['password']}"
         selection =request.POST['select']
         select = 0
@@ -31,8 +33,8 @@ def register(request):
         else:
             user = User.objects.create_user(username=username,password=password,email=email)
             user.save()
-            userprofile =models.userprofile(username=username,full_name=full_name,email=email,ac_type=select)
-            userprofile.save()
+            userp =userprofile(username=username,full_name=full_name,email=email,ac_type=select,img=img)
+            userp.save()
 
             # automatic login 
             user_log = auth.authenticate(username=username,password=password)
@@ -40,8 +42,10 @@ def register(request):
             for i in username:
                 c+=str(ord(i))
             new_username = hex(int(c))
-            new_um = models.usernameConvart(username=username,new_username=new_username)
+            new_um = usernameConvart(username=username,new_username=new_username)
             new_um.save()
+            co = models.contact.objects.get_or_create(pk=username)
+            qu = models.Quality.objects.get_or_create(pk=username)
             if user_log is not None:
                 auth.login(request, user_log)
                 return redirect(f'st/{new_username}/dash')
@@ -57,7 +61,7 @@ def login(request):
         password = f"smarty{request.POST['password']}" 
         user = auth.authenticate(username=username, password=password)
         if user is not None:
-            n = models.usernameConvart.objects.get(pk=username)
+            n = usernameConvart.objects.get(pk=username)
             auth.login(request,user)
             return redirect(f'st/{n.new_username}/dash')
 

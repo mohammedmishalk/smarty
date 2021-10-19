@@ -1,10 +1,9 @@
 {% extends 'tea_acc.html' %}
   {% block profile %}
   {% load static %}
-
-<div class="view">
-	<div class="card-container">
-		<span class="pro">TEACHER</span>
+<div class="view" style="margin-left: .8rem; background-color: #E4E9F7;">
+		<div class="card-container col-11 col-sm-6 col-md-6 col-lg-3">
+			<span class="pro">TEACHER</span>
 		<img class="round" src="{{user.img.url}}" alt="user" />
 		<h3>{{user.username}}</h3>
 		<h6>{{cv.domain}}</h6>
@@ -29,67 +28,68 @@
 				<li>Node</li>
 			</ul>
 		</div>
-	</div>
-	<div class="card-container">
-		<form action="edit" method="POST" enctype="multipart/form-data">
-		{% csrf_token %}
-			<h5>My Account</h5>
-			<label for="icon" class="labelfor">Profile photo</label>
-			<input class="form-control form-account" style="margin-left: 1rem;" name="photo" type="file" id="formFile">
-			<label for="fname" class="labelfor">Full name</label>
-			<input type="text" name="name" id="fname" class="form-account" value="{{user.full_name}}" required/>
-			<label for="address" class="labelfor">Current address</label>
-			<textarea name="add" id="area" class="notes" cols="35" rows="4">{{user.address}}</textarea>
-			<label for="dob" class="labelfor">Date of Birth {{user.DOB}}</label>
-			<input type="date" name="dob" id="dob" class="form-account" required/>
-			<label for="fname" class="labelfor">Email</label>
-			<input type="emile" name="email" id="email" value="{{user.email}}" class="form-account" required/>
-			<label for="password" class="labelfor hidden-pass">Password</label>
-			<input type="password" name="pass" id="pas" class="form-account hidden-pass"/>
-			<input type="submit" class="sub" value="Submit">
-			<button class="primary ghost">
-				Reset
-			</button>
-		</form>
-	</div>
-	<div class="card-container">
-		<form action="editc" method="POST">
-		{% csrf_token %}
-			<label for="Domain" class="labelfor">Job Domain</label>
-			<input type="text" name="sub" id="sub" value="{{cv.domain}}" class="form-account"/>
-			<label for="bio" class="labelfor">bio</label>
-			<textarea name="bio" class="notes" rows="3" placeholder="Add bio...">{{cv.bio}}</textarea>
-			<label for="Qu" class="labelfor">Qualifications</label>
-			<textarea name="Qu" class="notes" rows="5" placeholder="briefly describe your Qualifications...">{{cv.qu}}</textarea>
-			<label for="Ex" class="labelfor">Experience</label>
-			<textarea name="Ex" class="notes" rows="5" placeholder="briefly describe your Experience...">{{cv.ex}}</textarea>
-		<input type="submit" class="sub" value="Submit">
-			<button class="primary ghost">
-				Reset
-			</button>
-			</form>
-	</div>
-	<div class="card-container">
-		<form action="edits" method="POST">
-		{% csrf_token %}
-			<h5>Social accounts</h5>
-			<input type="text" name="fb" placeholder="facebook" value="{{contact.facebook}}" class="form-account" />
-			<input type="text" name="insta" placeholder="instagram" value="{{contact.instagram}}"" class="form-account" />
-			<input type="text" name="twit" placeholder="twitter" value="{{contact.twitter}}" class="form-account" />
-			<input type="text" name="in" placeholder="linkedin" value="{{contact.linked_in}}" class="form-account" />
-			<h5 style="margin-top: 1rem;"> Sources</h5>
-			<input type="text" name="yt" placeholder="youtube" value="{{contact.youtube}}" class="form-account" />
-			<input type="text" name='hub' placeholder="github" value="{{contact.github}}" class="form-account"/>
-			<input type="text" name="lab" placeholder="gitlab" value="{{contact.gitlab}}" class="form-account"/>
-			<input type="text" name="web" placeholder="website" value="{{contact.website}}" class="form-account"/>
-			<input type="submit" class="sub" value="Submit">
-			<button class="primary ghost">
-				Reset
-			</button>
+		</div>
+		<div class="card-container col-11 col-sm-5 col-md-5 col-lg-3">
+			<form action="edit" method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+					<h5>My Account</h5>
+					<label for="icon" class="labelfor">Profile photo</label>
+					<input class="form-control form-account" style="margin-left: 1rem;" name="photo" type="file" id="formFile">
+					<label for="fname" class="labelfor">Full name</label>
+					<input type="text" name="name" id="fname" class="form-account" value="{{user.full_name}}" required/>
+					<label for="address" class="labelfor">Current address</label>
+					<textarea name="add" id="area" class="notes" cols="35" rows="4">{{user.address}}</textarea>
+					<label for="dob" class="labelfor">Date of Birth {{user.DOB}}</label>
+					<input type="date" name="dob" id="dob" class="form-account" required/>
+					<label for="fname" class="labelfor">Email</label>
+					<input type="emile" name="email" id="email" value="{{user.email}}" class="form-account" required/>
+					<label for="password" class="labelfor hidden-pass">Password</label>
+					<input type="password" name="pass" id="pas" class="form-account hidden-pass"/>
+					<input type="submit" class="sub" value="Submit">
+					<button class="primary ghost">
+						Reset
+					</button>
+				</form>
+		</div>
+		<div class="card-container col-11 col-sm-6 col-md-6 col-lg-3">
+			<form action="editc" method="POST">
+				{% csrf_token %}
+					<label for="Domain" class="labelfor">Job Domain</label>
+					<input type="text" name="sub" id="sub" value="{{cv.domain}}" class="form-account"/>
+					<label for="bio" class="labelfor">bio</label>
+					<textarea name="bio" class="notes" rows="3" placeholder="Add bio...">{{cv.bio}}</textarea>
+					<label for="Qu" class="labelfor">Qualifications</label>
+					<textarea name="Qu" class="notes" rows="5" placeholder="briefly describe your Qualifications...">{{cv.qu}}</textarea>
+					<label for="Ex" class="labelfor">Experience</label>
+					<textarea name="Ex" class="notes" rows="5" placeholder="briefly describe your Experience...">{{cv.ex}}</textarea>
+				<input type="submit" class="sub" value="Submit">
+					<button class="primary ghost">
+						Reset
+					</button>
+					</form>
+		</div>
+		<div class="card-container col-11 col-sm-5 col-md-5 col-lg-2">
+			<form action="edits" method="POST">
+				{% csrf_token %}
+					<h5>Social accounts</h5>
+					<input type="text" name="fb" placeholder="facebook" value="{{contact.facebook}}" class="form-account" />
+					<input type="text" name="insta" placeholder="instagram" value="{{contact.instagram}}" class="form-account" />
+					<input type="text" name="twit" placeholder="twitter" value="{{contact.twitter}}" class="form-account" />
+					<input type="text" name="in" placeholder="linkedin" value="{{contact.linked_in}}" class="form-account" />
+					<h5 style="margin-top: 1rem;"> Sources</h5>
+					<input type="text" name="yt" placeholder="youtube" value="{{contact.youtube}}" class="form-account" />
+					<input type="text" name='hub' placeholder="github" value="{{contact.github}}" class="form-account"/>
+					<input type="text" name="lab" placeholder="gitlab" value="{{contact.gitlab}}" class="form-account"/>
+					<input type="text" name="web" placeholder="website" value="{{contact.website}}" class="form-account"/>
+					<input type="submit" class="sub" value="Submit">
+					
+		
+				</form>	
+		
+		</div>
 
-		</form>	
-
-	</div>
 </div>
+
+
 
 {% endblock %}

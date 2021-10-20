@@ -1,0 +1,16 @@
+{% extends 'add_course.html' %}
+  {% block add_course_form %}
+  {% load static %}
+     <form action="acw" method="post">
+     {% csrf_token %}
+                <input type="text" name="wname" id="" placeholder=" enter week name " required/><br/>
+                <input type="number" name="time" id="" placeholder="time to complet" required>
+                <select name="duration" id="">
+                    <option value="m">minuts</option>
+                    <option value="h">hours</option>
+                    <option value="d">Day</option>
+                </select><br>
+                <textarea name="dis" id="" cols="40" rows="5"></textarea><br>
+                <input type="submit" value="submit">
+            </form>
+  {% endblock %}

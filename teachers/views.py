@@ -2,7 +2,9 @@ from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import auth,User
 from accounts.models import userprofile, usernameConvart
+from course.models import course
 from . import models
+import random
 
 # Create your views here.
 def dashboard(request, new_username):
@@ -109,4 +111,35 @@ def  password_update(p,u):
     data.save()
 
 def add_course(request,new_username):
-    return render(request,"add_course.html")
+    if request.method=='POST':
+        name = request.POST['cname']
+        time = request.POST['time']
+        duration= request.POST['duration']
+        td=f"{time} {duration}"
+        dic =request.POST['dis']
+        skils =request.POST['skils']
+        u=nameconvert(new_username)
+        id = id_generator()
+        cs= course(course_id=id,techer_id=u,name=name,time=td,desciptions=dic)
+        cs.save()
+        week=cs.week
+        return redirect(f"acw/{id}/{week}")
+    else:
+        return render(request,"ac_forms.html")
+
+def id_generator():
+    while True:
+        randum_id = random.randint(999,99999)
+        if course.objects.filter(course_id=randum_id).exists():
+            continue
+        else:
+            id = randum_id
+            break
+    return id
+
+def acw(request,new_username,course_id,week):
+    if request.method =='POST':
+        pass
+    else:
+        return HttpResponse("ready") 
+

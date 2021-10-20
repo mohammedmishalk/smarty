@@ -1,4 +1,4 @@
-from os import name
+from os import SEEK_CUR, name
 from django.db import models
 
 # Create your models here.
@@ -22,31 +22,17 @@ class Quality(models.Model):
     ex = models.CharField(max_length=1000)
 
 class course(models.Model):
-    id = models.IntegerField(unique=True, null=False, primary_key= True)
-    name = models.CharField(max_length=255,null=False)
-    teacher = models.CharField(max_length=255)
+    course_id=models.CharField(max_length=255,null=False,unique=True,primary_key=True)
+    techer_id=models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
     desciptions = models.CharField(max_length=5000)
-    enroled = models.IntegerField(null=True)
-    time = models.IntegerField(null=False)
-    rating = models.IntegerField(null=True)
-    skill = models.CharField(max_length=500, null=False)
+    week = models.IntegerField(default=0)
+    unit = models.IntegerField(default=0)
+    enroled = models.IntegerField(default=0)
+    time = models.CharField(max_length=20,null=False)
+    rating = models.IntegerField(default=0)
 
-class course_content(models.Model):
-    id = models.IntegerField(unique=True, null=False, primary_key= True)
-    week = models.IntegerField()
-    unit= models.IntegerField()
-
-class textContent (models.Model):
-    name = models.CharField(max_length=100,unique=True, null=False, primary_key= True)
-    content =models.CharField(max_length=5000)
-
-class imageContent(models.Model):
-    title = models.CharField(max_length=100,unique=True, null=False, primary_key= True)
-    img = models.ImageField(upload_to='content/')
-
-class Videos(models.Model):
-    title = models.CharField(max_length=100,unique=True, null=False, primary_key= True)
-    video = models.FileField(upload_to='videos/')
+"""
 
 class assignments(models.Model):
     name= models.CharField(max_length=100,unique=True, null=False, primary_key= True)
@@ -60,4 +46,4 @@ class exam (models.Model):
 
 class project (models.Model):
     name =models.CharField(max_length=100,unique=True, null=False, primary_key= True)
-    file = models.FileField(upload_to='projects/')
+    file = models.FileField(upload_to='projects/')"""

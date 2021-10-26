@@ -2,9 +2,9 @@
   {% block content %}
   {% load static %}
 
-  <link rel="stylesheet" type="text/css" href="{% static 'css/add.css' %}">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/add.css' %}">
 </head>
     <div class="container">
         <div class="row justify-content-center" style="margin-top: 2rem;">
@@ -20,7 +20,23 @@
             </div>
         </div></div>
     </div>
-    <script src="{% static 'js/add_course.js' %}"></script>
+
+    <script>
+        function skilChange(){
+            var b =document.getElementById('skils')
+            var a=document.getElementById('values').value
+            document.getElementById('values').value=a+b.value+",";
+            b.value="";
+            
+        }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'js/add.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+        <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>  
+    <script>  
+        CKEDITOR.replace('editor1');  
+        CKEDITOR.replace('editor2');  
+    </script>
 
   {% endblock %}

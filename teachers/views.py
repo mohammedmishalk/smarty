@@ -8,6 +8,7 @@ import random
 
 # Create your views here.
 def dashboard(request, new_username):
+    print(request.user.username)
     return render(request,"card.html")
 
 def userp(request, new_username):
@@ -112,15 +113,16 @@ def  password_update(p,u):
 
 def add_course(request,new_username):
     if request.method=='POST':
-        name = request.POST['cname']
-        time = request.POST['time']
-        duration= request.POST['duration']
+        name = request.POST.get('name')
+        time = request.POST.get('time')
+        duration= request.POST.get('dr')
+        dic =request.POST.get('dis')
+        sk =request.POST.get('skils')
         td=f"{time} {duration}"
-        dic =request.POST['dis']
-        skils =request.POST['skils']
+        skils=sk.split(',')
         u=nameconvert(new_username)
         id = id_generator()
-        cs= course(course_id=id,techer_id=u,name=name,time=td,desciptions=dic)
+        cs= course(course_id=id,techer_id=u,name=name,time=td,desciptions=dic,skils=skils)
         cs.save()
         week=cs.week
         return redirect(f"acw/{id}/{week}")

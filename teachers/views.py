@@ -1,33 +1,32 @@
-from django.http.response import HttpResponse
+from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import auth,User
-from accounts.models import userprofile, usernameConvart
+from accounts.models import userprofile
 from course.models import course
 from . import models
 import random
 
-# Create your views here.
-def dashboard(request, new_username):
-    print(request.user.username)
+def dashboard(request):
     return render(request,"card.html")
 
-def userp(request, new_username):
+def userp(request):
     if request.method == 'GET':
-        user = nameconvert(new_username)
+        user = request.user.username
         user_data = userdata(user)
         cv_data =cvdata(user)
         contact_data =contactdata(user)
         return render(request,'profile.html',{"user":user_data,"cv":cv_data,"contact":contact_data,})
 
-def ask(request, new_username):
+def ask(request):
     if request.method == 'GET':
         return render(request,'te_ask.html')
 
-def chat(request, new_username):
+def chat(request):
     if request.method == 'GET':
         return render(request,'te_chat.html')
 
-def edit(request,new_username):
+def edit(request):
+    user = request.user.username
     if request.method =='GET':
         return render(request,"te_edit.html")
     elif request.method == "POST":
@@ -37,30 +36,29 @@ def edit(request,new_username):
         address = request.POST["add"]
         password=f"smarty{request.POST['pass']}"
         dob =request.POST['dob']
-        user = nameconvert(new_username)
         personal_data=userdata(user)
         userprof = userprofile(full_name =name,email =email,
                                 address= address,DOB =dob,img = img,
                                 ac_type=personal_data.ac_type,username=personal_data.username)
         userprof.save()
-        password_update(p=password ,u=new_username)
-        return redirect(f'/te/{new_username}/userp')
+        return redirect(f'/te/userp')
     else:
         return redirect("/home")
 
 
-def editc(request, new_username):
+def editc(request):
+    user = request.user.username
     if request.method == "POST":
         domain = request.POST["sub"]
         bio = request.POST["bio"]
         qu = request.POST["Qu"]
         ex = request.POST["Ex"]
-        user = nameconvert(new_username)
         personal_data=userdata(user)
-        cv = models.Quality(username=personal_data.username,domain=domain,bio=bio,qu=qu,ex=ex )
+        cv = models.Quality(username=user,domain=domain,bio=bio,qu=qu,ex=ex )
         cv.save()
-        return redirect(f'/te/{new_username}/userp')
-def edits(request, new_username):
+        return redirect(f'/te/userp')
+def edits(request):
+    user = request.user.username
     if request.method == "POST":
         facebook = request.POST["fb"]
         instagram = request.POST["insta"]
@@ -70,20 +68,13 @@ def edits(request, new_username):
         github = request.POST["hub"]
         gitlab = request.POST["lab"]
         website = request.POST["web"]
-        user = nameconvert(new_username)
         personal_data=userdata(user)
-        contact = models.contact(username=personal_data.username,facebook=facebook,instagram=instagram,twitter=twitter,linked_in=linked_in,youtube=youtube,github=github,gitlab=gitlab,website=website )
+        contact = models.contact(username=user,facebook=facebook,instagram=instagram,twitter=twitter,linked_in=linked_in,youtube=youtube,github=github,gitlab=gitlab,website=website )
         contact.save()
-        return redirect(f'/te/{new_username}/userp')
+        return redirect(f'/te/userp')
     else:
         return HttpResponse("not working")
 
-
-def nameconvert(n):
-    u=usernameConvart.objects.filter(new_username=n)
-    s=u[0]
-    username = s.username
-    return s.username
 
 def userdata(username):
     user = userprofile.objects.get(pk=username)
@@ -97,21 +88,16 @@ def contactdata(username):
     codata =models.contact.objects.get(pk=username)
     return codata
     
-def earnings(request, new_username):
+def earnings(request):
     if request.method == 'GET':
         return render(request,'te_earn.html')
 
-def logout(request , new_username):
+def logout(request):
     auth.logout(request)
     return redirect('/')
 
-def  password_update(p,u):
-    user = nameconvert(u)
-    data = User.objects.get(username=user)
-    data.set_password(p)
-    data.save()
 
-def add_course(request,new_username):
+def add_course(request):
     if request.method=='POST':
         name = request.POST.get('name')
         time = request.POST.get('time')
@@ -120,12 +106,12 @@ def add_course(request,new_username):
         sk =request.POST.get('skils')
         td=f"{time} {duration}"
         skils=sk.split(',')
-        u=nameconvert(new_username)
+        u= request.user.username
         id = id_generator()
         cs= course(course_id=id,techer_id=u,name=name,time=td,desciptions=dic,skils=skils)
         cs.save()
         week=cs.week
-        return redirect(f"acw/{id}/{week}")
+        return HttpResponse("")
     else:
         return render(request,"ac_forms.html")
 
@@ -138,10 +124,3 @@ def id_generator():
             id = randum_id
             break
     return id
-
-def acw(request,new_username,course_id,week):
-    if request.method =='POST':
-        pass
-    else:
-        return HttpResponse("ready") 
-

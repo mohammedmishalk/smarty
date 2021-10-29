@@ -46,14 +46,11 @@ $(document).on('submit', '#form02', (e) => {
         type: 'POST',
         url: "addcourse",
         data: {
-            name: $('#cname').val(),
-            time: $('#time').val(),
-            dr: $('#dr').val(),
-            dis: $('#discriptions').val(),
-            skils: $('#values').val(),
+            password: $('#password').val(),
             csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
         },
         success: () => {
+            
             cercle02.classList.add("bg-success");
             formDiv1.classList.add('hidden');
             document.getElementById('headder1').classList.remove("text-muted")

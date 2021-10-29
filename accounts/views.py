@@ -48,7 +48,7 @@ def register(request):
             qu = models.Quality.objects.get_or_create(pk=username)
             if user_log is not None:
                 auth.login(request, user_log)
-                return redirect(f'st/{new_username}/dash')
+                return redirect(f'st/dash')
 
             else:
                 messages.error(request, "invalid submition")
@@ -63,7 +63,7 @@ def login(request):
         if user is not None:
             n = usernameConvart.objects.get(pk=username)
             auth.login(request,user)
-            return redirect(f'st/{n.new_username}/dash')
+            return redirect(f'st/dash')
 
         else:
             msg = 'invalid username or password'

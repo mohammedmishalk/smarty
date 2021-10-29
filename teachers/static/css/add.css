@@ -177,20 +177,21 @@ section .details span{
 }
 
 .learn {
-    margin-left: 2rem;
     padding: .3rem;
     box-shadow: 0 4px 8px 0 rgb(180, 180, 180);
-    float: right;
 
 }
 
-.hidden{
+.hidden{ 
     animation: .8s ease-in-out 0.2s 1 anim-rev forwards;
     overflow: hidden;
 }
 .hide{
     animation: .0s ease-in-out 0.0s 1 anim-rev forwards;
     overflow: hidden;
+}
+.qust{
+  padding-bottom: 0;
 }
 @keyframes anim {
     0% {

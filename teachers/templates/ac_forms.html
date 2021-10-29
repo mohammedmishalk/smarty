@@ -2,97 +2,124 @@
 {% block add_course_form %}
 {% load static %}
 <div class="full-size col-11 col-md-10 col-lg-10">
-        <div class="rows">
-            <div class="cs" id="cs">
-                <h1 id="num">01</h1>
-            </div>
-            <h1 id="headder" class="headder">Start new course</h1>
+    <div class="rows">
+        <div class="cs" id="cs">
+            <h1 id="num">01</h1>
         </div>
-        <div class="rows" id="row1">
-            <div class="line" id="line">
-            </div>
-            <div class="forms col-9 col-md-10 col-lg-9" id="forms">
-                <form method="post" id="form01">
+        <h1 id="headder" class="headder">Start new course</h1>
+    </div>
+    <div class="rows" id="row1">
+        <div class="line" id="line">
+        </div>
+        <div class="forms col-9 col-md-10 col-lg-9" id="forms">
+            <form method="post" id="form01">
                 {% csrf_token %}
-                    <input type="text" name="cname" id="cname" class="form-control form-item"
-                        placeholder=" enter course name " required/>
-                    <div class="form-group" style="display:inline-flex;width: 100%;">
-                        <input type="number" name="ftime" id="time" class="form-control form-item"
-                            placeholder="time to complet" style="width: 80%;">
-                        <select name="duration" class="form-control form-item choose" id="dr" required>
-                            <option selected>Time</option>
-                            <option value="m">minuts</option>
-                            <option value="h">hours</option>
-                            <option value="d">Day</option>
-                            <option value="w">Week</option>
-                            <option value="m">Month</option>
-                            <option value="y">Year</option>
-                        </select>
+                <input type="text" name="cname" id="cname" class="form-control form-item"
+                    placeholder=" enter course name " required />
+                <div class="form-group" style="display:inline-flex;width: 100%;">
+                    <input type="number" name="ftime" id="time" class="form-control form-item"
+                        placeholder="time to complet" style="width: 80%;">
+                    <select name="duration" class="form-control form-item choose" id="dr" required>
+                        <option selected>Time</option>
+                        <option value="m">minuts</option>
+                        <option value="h">hours</option>
+                        <option value="d">Day</option>
+                        <option value="w">Week</option>
+                        <option value="m">Month</option>
+                        <option value="y">Year</option>
+                    </select>
+                </div>
+                <textarea class="form-control form-item" name="editor1" id="discriptions" cols="40" rows="5"
+                    placeholder="Course discription..."></textarea>
+                <div class="form-group" style="display:inline-flex;width: 100%;">
+                    <input type="text" name="" id="skils" class="form-control form-item" placeholder="skils"
+                        style="width: 80%;" />
+                    <div class="btn btn-outline-success" style="height: 2.5rem;border: 1;width:20%;"
+                        onclick="skilChange()">Add</div>
                     </div>
-                    <textarea class="form-control form-item" name="editor1" id="discriptions" cols="40" rows="5"
-                        placeholder="Course discription..."></textarea>
-                    <div class="form-group" style="display:inline-flex;width: 100%;">
-                        <input type="text" name="" id="skils" class="form-control form-item" placeholder="skils"
-                            style="width: 80%;" />
-                        <div class="btn btn-outline-success" style="height: 2.5rem;border: 1;width:20%;"
-                            onclick="skilChange()">Add</div>
-                    </div>
-                    <input type="text" name="skils" id="values" class="form-control form-item" style="background: none;"
-                        readonly />
-                    <input type="submit" class="btn btn-primary" value="submit" />
+                <input type="text" name="skils" id="values" class="form-control form-item" style="background: none;"
+                    readonly />
+                <input type="submit" class="btn btn-primary" value="submit" />
 
-                </form>
-            </div>
-        </div>
-        <div class="rows" id="rows">
-            <div class="cs bg-secondary" id="cs1">
-                <h1 id="num">02</h1>
-            </div>
-            <h3 id="headder1" class="headder text-muted" style="margin-top: .6rem;">Add Week</h3>
-        </div>
-        <div class="rows hide" id="row2">
-            <div class="" id="line2">
-            </div>
-            <div class="forms col-9 col-md-10 col-lg-9" id="forms">
-                <form method="post" id="form02">
-                {% csrf_token %}
-                    <input type="text" name="wname" id="wname" class="form-control form-item"
-                        placeholder=" enter week name " />
-                    <div class="form-group" style="display:inline-flex;width: 100%;">
-                        <input type="number" name="ftime" id="time" class="form-control form-item"
-                            placeholder="time to complet" style="width: 80%;">
-                        <select name="duration" class="form-control form-item choose" id="dr">
-                            <option selected>Time</option>
-                            <option value="m">minuts</option>
-                            <option value="h">hours</option>
-                        </select>
-                    </div>
-                    <textarea class="form-control form-item" name="editor2" id="discriptions" cols="40" rows="5"
-                        placeholder="Week discription..."></textarea>
-                    
-                   
-                    <input type="submit" class="btn btn-primary" value="submit" />
-
-                </form>
-            </div>
-        </div>
-        <div class="rows" id="rows">
-            <div class="cs bg-secondary" id="cs2">
-                <h1 id="num">03</h1>
-            </div>
-            <h3 id="headder" class="text-muted headder" style="margin-top: .6rem;">Frequently Asked Questions</h3>
-        </div>
-        <div class="rows hide" id="row3">
-            <div class="" id="line3">
-            </div>
-            <div class="forms col-9 col-md-10 col-lg-9" id="forms3">
-                <form method="post" id="form03">
-                {% csrf_token %}
-                    <textarea class="form-control form-item" name="tac" id="tac" cols="40" rows="5"
-                        placeholder="Terms and conditions"></textarea>
-                    
-                </form>
-            </div>
+            </form>
         </div>
     </div>
+    <div class="rows" id="rows">
+        <div class="cs bg-secondary" id="cs1">
+            <h1 id="num">02</h1>
+        </div>
+        <h3 id="headder1" class="headder text-muted" style="margin-top: .6rem;">Password verification</h3>
+    </div>
+    <div class="rows hide" id="row2">
+        <div class="" id="line2">
+        </div>
+        <div class="forms col-9 col-md-10 col-lg-9" id="forms">
+            <form method="post" id="form02">
+                {% csrf_token %}
+                <input type="password" name="password" id="password" class="form-control form-item"
+                    placeholder=" enter your password to verify " />
+                <input type="submit" class="btn btn-primary" value="submit" />
+            </form>
+        </div>
+    </div>
+    <div class="rows" id="rows">
+        <div class="cs bg-secondary" id="cs2">
+            <h1 id="num">03</h1>
+        </div>
+        <h3 id="headder" class="text-muted headder" style="margin-top: .6rem;">Frequently Asked Questions</h3>
+    </div>
+    <div class="rows hide" id="row3">
+        <div class="" id="line3">
+        </div>
+        <div class="forms col-9 col-md-10 col-lg-9" id="forms3">
+            <form method="post" id="form03">
+                {% csrf_token %}
+                <ul>
+                    <li>
+                        <div class="row">
+                            <div><u>Q.1</u></div>
+                            <p class="text-muted qust">Is this course really 100% online? Do I need to attend any classes in
+                                person?</p>
+                        </div>
+                        <textarea class="form-control form-item" name="tac" cols="40" rows="5"
+                            placeholder="Terms and conditions"></textarea>
+                    </li>
+                    <li>
+                        <div class="row">
+                            <div class="Q"><u>Q.2</u></div>
+                            <p class="text-muted qust">What background knowledge is necessary?</p>
+                        </div>
+                        <textarea class="form-control form-item" name="tac" cols="40" rows="5"
+                            placeholder="Terms and conditions"></textarea>
+                    </li>
+                    <li>
+                        <div class="row">
+                            <div class="Q"><u>Q.3</u></div>
+                            <p class="text-muted qust">Which jobs does this program prepare for?</p>
+                        </div>
+                        <textarea class="form-control form-item" name="tac" cols="40" rows="5"
+                            placeholder="Terms and conditions"></textarea>
+                    </li>
+                    <li>
+                        <div class="row">
+                            <div class="Q"><u>Q.4</u></div>
+                            <p class="text-muted qust">What will I be able to do upon completing the professional
+                                certificate?</p>
+                            </div>
+                            <textarea class="form-control form-item" name="tac" cols="40" rows="5"
+                                ="Terms and conditions"></textarea>
+                    </li>
+                    <li>
+                        <div class="row">
+                            <div class="Q"><u>Q.5</u></div>
+                            <p class="text-muted qust">Why did create this program?</p>
+                        </div>
+                        <textarea class="form-control form-item" name="tac" cols="40" rows="5"
+                            placeholder="Terms and conditions"></textarea>
+                    </li>
+                </ul>
+            </form>
+        </div> 
+    </div>
+</div>
 {% endblock %}

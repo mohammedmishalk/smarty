@@ -2,7 +2,7 @@ from django.contrib import admin
 from . import models
 
 class courseAdmin(admin.ModelAdmin):
-    list_display=('course_id','techer_id','name','week','unit','enroled','time','rating','skils')
+    list_display=('course_id','teacher_id','name','week','unit','enroled','time','rating','skils')
 
 class textContentAdmin(admin.ModelAdmin):
     list_display=('id','name','time')

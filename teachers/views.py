@@ -99,21 +99,32 @@ def logout(request):
 
 def add_course(request):
     if request.method=='POST':
-        name = request.POST.get('name')
-        time = request.POST.get('time')
-        duration= request.POST.get('dr')
-        dic =request.POST.get('dis')
-        sk =request.POST.get('skils')
+        name = request.POST['cname']
+        time = request.POST['time']
+        duration= request.POST['duration']
+        dic =request.POST['editor1']
+        sk =request.POST['skils']
         td=f"{time} {duration}"
         skils=sk.split(',')
+        qs={
+            "q1":request.POST['tac1'],
+            "q2":request.POST['tac2'],
+            "q3":request.POST['tac3'],
+            "q4":request.POST['tac4'],
+            "q5":request.POST['tac5'],
+        }
         u= request.user.username
         id = id_generator()
-        cs= course(course_id=id,techer_id=u,name=name,time=td,desciptions=dic,skils=skils)
+        cs= course(course_id=id,teacher_id=u,name=name,time=td,discriptions=dic,skils=skils,Questions=qs)
         cs.save()
         week=cs.week
-        return HttpResponse("")
+        return redirect(f"/te/mycourse")
     else:
         return render(request,"ac_forms.html")
+def my_course(request):
+    user= request.user.username
+    courses= course.objects.filter(teacher_id=user)
+    return render(request,"my_courses.html",({"courses":courses}))
 
 def id_generator():
     while True:
@@ -124,3 +135,4 @@ def id_generator():
             id = randum_id
             break
     return id
+

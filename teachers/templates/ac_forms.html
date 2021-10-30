@@ -12,12 +12,12 @@
         <div class="line" id="line">
         </div>
         <div class="forms col-9 col-md-10 col-lg-9" id="forms">
-            <form method="post" id="form01">
+            <form method="POST" action="addcourse" id="form01">
                 {% csrf_token %}
                 <input type="text" name="cname" id="cname" class="form-control form-item"
                     placeholder=" enter course name " required />
                 <div class="form-group" style="display:inline-flex;width: 100%;">
-                    <input type="number" name="ftime" id="time" class="form-control form-item"
+                    <input type="number" name="time" id="time" class="form-control form-item"
                         placeholder="time to complet" style="width: 80%;">
                     <select name="duration" class="form-control form-item choose" id="dr" required>
                         <option selected>Time</option>
@@ -39,41 +39,16 @@
                     </div>
                 <input type="text" name="skils" id="values" class="form-control form-item" style="background: none;"
                     readonly />
-                <input type="submit" class="btn btn-primary" value="submit" />
-
-            </form>
-        </div>
-    </div>
-    <div class="rows" id="rows">
-        <div class="cs bg-secondary" id="cs1">
-            <h1 id="num">02</h1>
-        </div>
-        <h3 id="headder1" class="headder text-muted" style="margin-top: .6rem;">Password verification</h3>
-    </div>
-    <div class="rows hide" id="row2">
-        <div class="" id="line2">
-        </div>
-        <div class="forms col-9 col-md-10 col-lg-9" id="forms">
-            <form method="post" id="form02">
-                {% csrf_token %}
-                <input type="password" name="password" id="password" class="form-control form-item"
-                    placeholder=" enter your password to verify " />
-                <input type="submit" class="btn btn-primary" value="submit" />
-            </form>
-        </div>
-    </div>
-    <div class="rows" id="rows">
-        <div class="cs bg-secondary" id="cs2">
-            <h1 id="num">03</h1>
-        </div>
-        <h3 id="headder" class="text-muted headder" style="margin-top: .6rem;">Frequently Asked Questions</h3>
-    </div>
-    <div class="rows hide" id="row3">
-        <div class="" id="line3">
-        </div>
-        <div class="forms col-9 col-md-10 col-lg-9" id="forms3">
-            <form method="post" id="form03">
-                {% csrf_token %}
+                <div class="rows" id="rows">
+                    <div class="cs bg-secondary" id="cs2">
+                        <h1 id="num">02</h1>
+                    </div>
+                    <h3 id="headder" class="text-muted headder" style="margin-top: .6rem;">Frequently Asked Questions</h3>
+                </div>
+                <div class="rows" id="row3">
+                    <div class="line" id="line3">
+                </div > 
+                <div class="list-div">
                 <ul>
                     <li>
                         <div class="row">
@@ -81,24 +56,24 @@
                             <p class="text-muted qust">Is this course really 100% online? Do I need to attend any classes in
                                 person?</p>
                         </div>
-                        <textarea class="form-control form-item" name="tac" cols="40" rows="5"
-                            placeholder="Terms and conditions"></textarea>
+                        <textarea class="form-control form-item" name="tac1" cols="40" rows="5"
+                            placeholder="Write here...."></textarea>
                     </li>
                     <li>
                         <div class="row">
                             <div class="Q"><u>Q.2</u></div>
                             <p class="text-muted qust">What background knowledge is necessary?</p>
                         </div>
-                        <textarea class="form-control form-item" name="tac" cols="40" rows="5"
-                            placeholder="Terms and conditions"></textarea>
+                        <textarea class="form-control form-item" name="tac2" cols="40" rows="5"
+                            placeholder="Write here...."></textarea>
                     </li>
                     <li>
                         <div class="row">
                             <div class="Q"><u>Q.3</u></div>
                             <p class="text-muted qust">Which jobs does this program prepare for?</p>
                         </div>
-                        <textarea class="form-control form-item" name="tac" cols="40" rows="5"
-                            placeholder="Terms and conditions"></textarea>
+                        <textarea class="form-control form-item" name="tac3" cols="40" rows="5"
+                            placeholder="Write here...."></textarea>
                     </li>
                     <li>
                         <div class="row">
@@ -106,19 +81,22 @@
                             <p class="text-muted qust">What will I be able to do upon completing the professional
                                 certificate?</p>
                             </div>
-                            <textarea class="form-control form-item" name="tac" cols="40" rows="5"
-                                ="Terms and conditions"></textarea>
+                            <textarea class="form-control form-item" name="tac4" cols="40" rows="5"
+                                placeholder="Write here...."></textarea>
                     </li>
                     <li>
                         <div class="row">
                             <div class="Q"><u>Q.5</u></div>
                             <p class="text-muted qust">Why did create this program?</p>
                         </div>
-                        <textarea class="form-control form-item" name="tac" cols="40" rows="5"
-                            placeholder="Terms and conditions"></textarea>
+                        <textarea class="form-control form-item" name="tac5" cols="40" rows="5"
+                            placeholder="Write here...."></textarea>
                     </li>
                 </ul>
+                <input class="btn btn-primary" type="submit" name="submit" value="Create" style="margin-left: 2rem;">
+            </div>
             </form>
+        </div>
         </div> 
     </div>
 </div>

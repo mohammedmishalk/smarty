@@ -1,43 +1,52 @@
 {% extends 'tea_theme.html' %}
-  {% block content %}
-  {% load static %}
+{% block content %}
+{% load static %}
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/add.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{% static 'css/add.css' %}">
 </head>
-    <div class="container col-11 col-md-10 col-lg-10">
-     <div class="row">
-        <div class="col col-11 col-sm-11 col-md-7 col-lg-8 add">
+<div class="container-fluid col-11 col-md-10 col-lg-10">
+    <nav class="navbar navbar-light">
+        <form class="form-inline">
+            <button class="btn btn-outline-primary" type="button">Course</button>
+            <button class="btn btn-outline-primary" type="button">Regular Class</button>
+        </form>
+    </nav>
+    <div class="row" style="height:100vh;">
+        <div class="col col-11 col-sm-11 col-md-7 col-lg-8" style="overflow: scroll; height: 100vh;">
             {% block add_course_form %}
-      
+
             {% endblock %}
 
         </div>
         <div class="col col-12 col-md-4 col-lg-3 learn">
-            <div class="row"><p>How to start a course?</p></div>
-            <div class="row">
+            <div class="">
+                <p>How to start a course?</p>
             </div>
         </div>
-        </div>
     </div>
+</div>
 
-    <script>
-        function skilChange(){
-            var b =document.getElementById('skils')
-            var a=document.getElementById('values').value
-            document.getElementById('values').value=a+b.value+",";
-            b.value="";
-            
-        }
-    </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="{% static 'js/add.js' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-        <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>  
-    <script>  
-        CKEDITOR.replace('editor1');  
-        CKEDITOR.replace('editor2');  
-    </script>
+<script>
+    function skilChange() {
+        var b = document.getElementById('skils')
+        var a = document.getElementById('values').value
+        document.getElementById('values').value = a + b.value + ",";
+        b.value = "";
 
-  {% endblock %}
+    }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{% static 'js/add.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('editor1');
+    CKEDITOR.replace('editor2');
+</script>
+
+{% endblock %}

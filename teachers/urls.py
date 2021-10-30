@@ -11,6 +11,7 @@ urlpatterns = [
     path('logout',views.logout,name="logout"),
     path('edit',views.edit,name="edit"),
     path('addcourse',views.add_course,name="add course"),
+    path("mycourse",views.my_course,name="couser dashbord"),
     path('editc',views.editc,name="edit cv"),
     path('edits',views.edits,name="edit contact"),
 

@@ -21,16 +21,6 @@ class Quality(models.Model):
     qu = models.CharField(max_length=1000)
     ex = models.CharField(max_length=1000)
 
-class course(models.Model):
-    course_id=models.CharField(max_length=255,null=False,unique=True,primary_key=True)
-    techer_id=models.CharField(max_length=100)
-    name = models.CharField(max_length=100)
-    desciptions = models.CharField(max_length=5000)
-    week = models.IntegerField(default=0)
-    unit = models.IntegerField(default=0)
-    enroled = models.IntegerField(default=0)
-    time = models.CharField(max_length=20,null=False)
-    rating = models.IntegerField(default=0)
 
 """
 

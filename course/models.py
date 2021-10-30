@@ -2,15 +2,19 @@ from django.db import models
 
 class course(models.Model):
     course_id=models.CharField(max_length=255,null=False,unique=True,primary_key=True)
-    techer_id=models.CharField(max_length=100)
+    teacher_id=models.CharField(max_length=100)
     name = models.CharField(max_length=100)
-    desciptions = models.CharField(max_length=5000,null=True)
+    discriptions = models.CharField(max_length=5000,null=True)
     week = models.IntegerField(default=0)
     unit = models.IntegerField(default=0)
     enroled = models.IntegerField(default=0)
+    completed = models.IntegerField(default=0)
     time = models.CharField(max_length=20,null=False)
     rating = models.IntegerField(default=0)
-    skils = models.JSONField(null=True)
+    skils = models.JSONField()
+    Questions = models.JSONField(default=dict)
+
+
 
 class text_content (models.Model):
     id=models.CharField(max_length=8,null=False,unique=True,primary_key=True)

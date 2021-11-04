@@ -126,6 +126,24 @@ def my_course(request):
     courses= course.objects.filter(teacher_id=user)
     return render(request,"my_courses.html",({"courses":courses}))
 
+
+def course_management(request,course_id):
+    user=request.user.username
+    data=course.objects.get(pk=course_id)
+    return render(request,"st_manage.html",{"data":data})
+
+def course_method(request,course_id,method):
+    user= request.user.username
+    if method == "U":
+        return render(request,"course_update.html")
+    elif method =="P":
+        courses= course.objects.filter(teacher_id=user)
+        return render(request,"te_course_view.html",({"courses":courses}))
+    elif method =="D":
+        #deleteCourse(request)
+        return redirect("/te/mycourse")
+    elif method == "E":
+        return render(request,"course_edit.html")
 def id_generator():
     while True:
         randum_id = random.randint(999,99999)
@@ -136,3 +154,5 @@ def id_generator():
             break
     return id
 
+def deleteCourse(request):
+    print("hallo")

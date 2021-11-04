@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
     <title>Smarty Students</title>
     {% load static %}
     <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
@@ -29,49 +31,49 @@
                 <span class="tooltip">Add Course</span>
             </li>
             <li>
-                <a href="dash">
+                <a href="/te/dash">
                     <i class='bx bx-grid-alt'></i>
                     <span class="links_name">Dashboard</span>
                   </a>
                    <span class="tooltip">Dashboard</span>
             </li>
             <li>
-                <a href="mycourse">
+                <a href="/te/mycourse">
                     <i class='bx bxl-discourse'></i>
                     <span class="links_name">My courses</span>
                   </a>
                    <span class="tooltip">My courses</span>
             </li>
             <li>
-                <a href="user">
+                <a href="/te/user">
                   <i class='bx bx-user' ></i>
                   <span class="links_name">User</span>
                 </a>
                 <span class="tooltip">User</span>
             </li>
             <li>
-                <a href="chat">
+                <a href="/te/chat">
                   <i class='bx bx-chat' ></i>
                   <span class="links_name">Messages</span>
                 </a>
                 <span class="tooltip">Messages</span>
               </li>
               <li>
-                <a href="earnings">
+                <a href="/te/earnings">
                   <i class='bx bx-money'></i>
                   <span class="links_name">Earnings</span>
                 </a>
                 <span class="tooltip">Earnings</span>
               </li>
               <li>
-                <a href="ask">
+                <a href="/te/ask">
                   <i class='bx bx-question-mark' ></i>
                   <span class="links_name">Question</span>
                 </a>
                 <span class="tooltip">Question</span>
               </li>
               <li class="profile">
-              <a href="logout">
+              <a href="/te/logout">
                   <i class='bx bx-log-out' id="log_out" ></i></a>
               </li>
         </ul>
@@ -82,5 +84,7 @@
       {% endblock %}
     </section>  
     <script src="{% static 'js/theme.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
 </body>
 </html>

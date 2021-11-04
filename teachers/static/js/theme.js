@@ -3,7 +3,7 @@ let closeBtn = document.querySelector("#btn1");
 let searchBtn = document.querySelector(".bx-search");
 
 closeBtn.addEventListener("click", ()=>{
-  sidebar.classList.toggle("open");
+  sidebar.classList.toggle("open")
   menuBtnChange();//calling the function(optional)
 });
 

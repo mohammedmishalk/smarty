@@ -1,0 +1,30 @@
+{% extends 'tea_theme.html' %}
+{% block content %}
+{% load static %}
+<style>
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+  
+.sticky + .content {
+    padding-top: 60px;
+}
+</style>
+<nav class="navbar navbar-light" id="navbar">
+  <form class="form-inline" style="width:100%;">
+    <button onclick="choices('U')" class="btn btn-outline-primary" id="update" style="margin-left:2rem;" type="button">Update</button>
+    <button onclick="choices('E')" class="btn btn-outline-success" id="edit" style="margin-left:2rem;" type="button">Edit</button>
+    <button onclick="choices('P')" class="btn btn-outline-info" id="preview" style="margin-left:2rem;" type="button">Preview</button>
+    <button onclick="choices('D')" class="btn btn-outline-danger" id="delete" style="margin-left:2rem;" type="button">Delete</button>
+    <hr/>
+  </form>
+</nav>
+<div class="container">
+    {% block management %}
+
+    {% endblock %}
+</div>
+<script src="{% static 'js/courseManagement.js' %}""></script>
+{% endblock %}

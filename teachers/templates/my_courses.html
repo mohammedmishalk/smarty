@@ -1,8 +1,6 @@
 {% extends 'tea_theme.html' %}
   {% block content %}
     {% load static %}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-
     <nav class="navbar navbar-light" style="margin: 2rem;margin-top: 0rem;">
         <a class="navbar-brand" href="#" >
           <img src="" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -29,14 +27,14 @@
             <tbody>
               {% for course in courses %}
               
-              <tr>
+              <tr onclick="courseSelection({{course.course_id}})">
                 <th scope="row">{{forloop.counter}}</th>
                 <td>{{course.course_id}}</td>
                 <td>{{course.name}}</td>
                 <td>{{course.enroled}}</td>
                 <td>{{course.completed}}</td>
                 <td>{{course.rating}}</td>
-                <td>http://127.0.0.1:8000/course/{{course.course_id}}</td>
+                <td onclick="LinkCopy({{course.course_id}})">http://127.0.0.1:8000/course/{{course.course_id}}</td>
                 <td><Button class="btn btn-danger">delete</Button></td>
               </tr>
               {% endfor %}
@@ -80,7 +78,14 @@
         </div>
         {% endif %}
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script>
+      function courseSelection(id){
+        window.location = "/te/mycourse/"+id;
+      }
+      function LinkCopy(id){
+         navigator.clipboard.writeText("http://127.0.0.1:8000/course/"+id);
+         
+      }
+    </script>
 
     {% endblock %}

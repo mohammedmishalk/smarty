@@ -1,3 +1,4 @@
+from typing import Dict, List
 from django.db import models
 
 class course(models.Model):
@@ -39,4 +40,8 @@ class Videos(models.Model):
     video = models.FileField(upload_to='videos/')
     time = models.IntegerField()
 
+class weeks(models.Model):
+    course_id = models.CharField(max_length=255,null=False,unique=True,primary_key=True)
+    week= models.JSONField(default=list)
+    content =models.JSONField(default=dict)
     

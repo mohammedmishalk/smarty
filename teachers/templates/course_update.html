@@ -1,7 +1,50 @@
 {% extends 'course_management.html' %}
 {% block management %}
 {% load static %}
-<div>
-Update
+<style>
+          @import url('https://fonts.googleapis.com/css2?family=Zen+Antique&display=swap');
+
+          .box {
+                    width: 500px;
+                    height: 5px;
+                    background-color: rgb(160, 220, 228);
+                    border-radius: 8px;
+                    margin-top:1rem;
+          }
+
+          h3 {
+                    font-family: 'Zen Antique', serif;
+          }
+</style>
+<div class="container">
+          <div class"row">
+                    {% for week in data.week %}
+                        <h5 class="btn btn-outline-info" style="padding:0 !importent; margin-botton:0;">Week 0{{forloop.counter}} </h5>
+                    {% endfor %}
+                    </div>
+          <div class="row g-3 align-items-center">
+                    <div class="box"></div>
+                    <h3>Next Week</h3>
+                    <form action="" method="POST">
+                    {% csrf_token %}
+                              <div class="mb-3">
+                                        <label for="weekDiscription" class="form-label">Week overview</label>
+                                        <textarea class="form-control" name="editor1" id="" wdis cols="30"
+                                                  rows="10"></textarea>
+                                        <div id="dicHelp" class="form-text">Add a short discription about this week
+                                        </div>
+                              </div>
+                              <div class="col-md-4">
+                                        <label for="time" class="form-label">Time to finish</label>
+                                        <input type="number" class="form-control" id="time" name="time"
+                                                  placeholder="in hours." />
+                              </div>
+                              <input type="submit" class="btn btn-primary" style="margin-top:2rem;margin-bottom: 3rem;"
+                                        value="Create week" /></form>
+          </div>
+         
+</div>
+
+
 </div>
 {% endblock %}

@@ -2,7 +2,7 @@ from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import auth,User
 from accounts.models import userprofile
-from course.models import course
+from course.models import course,weeks
 from . import models
 import random
 
@@ -117,7 +117,6 @@ def add_course(request):
         id = id_generator()
         cs= course(course_id=id,teacher_id=u,name=name,time=td,discriptions=dic,skils=skils,Questions=qs)
         cs.save()
-        week=cs.week
         return redirect(f"/te/mycourse")
     else:
         return render(request,"ac_forms.html")
@@ -135,15 +134,52 @@ def course_management(request,course_id):
 def course_method(request,course_id,method):
     user= request.user.username
     if method == "U":
-        return render(request,"course_update.html")
+        if request.method =='POST':
+            if weeks.objects.filter(course_id=course_id).exists():
+                data = weeks.objects.get(pk=course_id)
+            else:
+                w = weeks.objects.get_or_create(pk=course_id)
+            data = weeks.objects.get(pk=course_id)
+            weeksCount = len(data.week)
+            id = weekIdGenerater(course_id)
+            weekList =data.week
+            weekList.append(id)
+            weekDis =request.POST['editor1']
+            time =request.POST['time']
+            content= data.content
+            content[id]={"discription":weekDis,"time":time}
+            week = weeks(course_id=course_id,week=weekList,content=content)
+            week.save()
+            return render(request,"add_content.html")
+        else:
+            data=weeks.objects.get(pk=course_id)
+            return render(request,"add_content.html",({"data":data}))
     elif method =="P":
-        courses= course.objects.filter(teacher_id=user)
-        return render(request,"te_course_view.html",({"courses":courses}))
+        data=course.objects.get(pk=course_id)
+        return render(request,"te_course_view.html",({"data":data,"skils":data.skils,"faq":data.Questions,}))
     elif method =="D":
         #deleteCourse(request)
         return redirect("/te/mycourse")
     elif method == "E":
-        return render(request,"course_edit.html")
+        data=course.objects.get(pk=course_id)
+        if request.method=='POST':
+            skils=data.skils
+            name = request.POST['cname']
+            time = request.POST['time']
+            dic =request.POST['editor1']
+            qs={
+            "q1":request.POST['tac1'],
+            "q2":request.POST['tac2'],
+            "q3":request.POST['tac3'],
+            "q4":request.POST['tac4'],
+            "q5":request.POST['tac5'],
+        }
+            u= request.user.username
+            cs= course(course_id=course_id,teacher_id=u,name=name,time=time,discriptions=dic,skils=skils,Questions=qs)
+            cs.save()
+            return redirect("/te/mycourse")
+        else:
+            return render(request,"course_edit.html",({"data":data,"faq":data.Questions,}))
 def id_generator():
     while True:
         randum_id = random.randint(999,99999)
@@ -156,3 +192,14 @@ def id_generator():
 
 def deleteCourse(request):
     print("hallo")
+
+def weekIdGenerater(c_id):
+    while True:
+        r_id = random.randint(99,999)
+        randum_id= f"{c_id}W{r_id}"
+        if course.objects.filter(course_id=randum_id).exists():
+            continue
+        else:
+            id = randum_id
+            break
+    return id

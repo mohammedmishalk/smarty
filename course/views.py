@@ -4,5 +4,7 @@ from . import models
 
 def course(request,course_id):
     data=models.course.objects.get(pk=course_id)
-    print(data.skils)
-    return render(request,"course.html",{"data":data})
+    lst=[]
+    for i in data.skils:lst.append(i)
+    skils=dict(zip(lst,data.skils))
+    return render(request,"course.html",{"data":data,"skils":skils})

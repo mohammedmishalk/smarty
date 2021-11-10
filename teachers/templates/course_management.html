@@ -2,17 +2,71 @@
 {% block content %}
 {% load static %}
 <style>
-  .sticky {
-    position: fixed;
-    top: 0;
-    width: 100%;
-}
+.footer-basic {
+    padding:40px 0;
+    background-color:#ffffff;
+    color:#4b4c4d;
+  }
   
-.sticky + .content {
-    padding-top: 60px;
-}
+  .footer-basic ul {
+    padding:0;
+    list-style:none;
+    text-align:center;
+    font-size:18px;
+    line-height:1.6;
+    margin-bottom:0;
+  }
+  
+  .footer-basic li {
+    padding:0 10px;
+  }
+  
+  .footer-basic ul a {
+    color:inherit;
+    text-decoration:none;
+    opacity:0.8;
+  }
+  
+  .footer-basic ul a:hover {
+    opacity:1;
+  }
+  
+  .footer-basic .social {
+    text-align:center;
+    padding-bottom:25px;
+  }
+  
+  .footer-basic .social > a {
+    font-size:24px;
+    width:40px;
+    height:40px;
+    line-height:40px;
+    display:inline-block;
+    text-align:center;
+    border-radius:50%;
+    border:1px solid #ccc;
+    margin:0 8px;
+    color:inherit;
+    opacity:0.75;
+  }
+  
+  .footer-basic .social > a:hover {
+    opacity:0.9;
+  }
+  
+  .footer-basic .copyright {
+    margin-top:15px;
+    text-align:center;
+    font-size:13px;
+    color:#aaa;
+    margin-bottom:0;
+  }
+  
 </style>
-<nav class="navbar navbar-light" id="navbar">
+
+<div>
+<div>
+<nav class="navbar navbar-light" id="navbar" style="z-index:12;">
   <form class="form-inline" style="width:100%;">
     <button onclick="choices('U')" class="btn btn-outline-primary" id="update" style="margin-left:2rem;" type="button">Update</button>
     <button onclick="choices('E')" class="btn btn-outline-success" id="edit" style="margin-left:2rem;" type="button">Edit</button>
@@ -21,10 +75,30 @@
     <hr/>
   </form>
 </nav>
-<div class="container">
+</div>
+<div class="">
     {% block management %}
 
     {% endblock %}
 </div>
-<script src="{% static 'js/courseManagement.js' %}""></script>
+ <div class="footer-basic">
+        <footer>
+            <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Home</a></li>
+                <li class="list-inline-item"><a href="#">Services</a></li>
+                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            </ul>
+            <p class="copyright">Smarty © 2021</p>
+        </footer>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="{% static 'js/courseManagement.js' %}"></script>
+<script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('editor1');
+</script>
 {% endblock %}

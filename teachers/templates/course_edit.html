@@ -1,7 +1,80 @@
 {% extends 'course_management.html' %}
 {% block management %}
 {% load static %}
-<div>
-edit
+
+<div class="container">
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+          <label for="cname" class="form-label ">Course name</label>
+          <input type="text" name="cname" class="form-control" id="cname" value="{{data.name}}"/>
+    </div>
+    <div class="mb-3">
+          <label for="time" class="form-label ">Time to complete</label>
+          <input type="text" name="time" class="form-control" id="time"  value="{{data.time}}">
+    </div>
+    <div class="mb-3">
+    <label for="cname" class="form-label ">Course discription</label>
+    <textarea class="form-control" name="editor1" id="discriptions" cols="40" rows="5"
+          placeholder="Course discription...">{{data.discriptions}}</textarea>   
+    </div>
+    <div class="mb-3">
+    <h3><u>Frequently Asked Questions</u></h3>
+          <div>
+          <a style="text-decoration:none" data-bs-toggle="collapse" href="#collapse01" role="button" aria-expanded="false" aria-controls="collapseExample">
+                      <li class="list-group-item"><b>01 - </b> Is this course really 100% online? Do I need to attend any classes in
+                        person?</li>
+                    </a>
+                    <div class="collapse" id="collapse01">
+                      <div class="card card-body">
+                              <textarea class="form-control form-item" name="tac1" cols="40" rows="5"
+                              placeholder="Write here....">{{faq.q1}}</textarea>  
+                      </div>
+                      </div>
+            <ul class="list-group list-group-flush">
+              <a style="text-decoration:none" data-bs-toggle="collapse" href="#collapse02" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <li class="list-group-item"><b>02 - </b>What background knowledge is necessary?</li>
+              </a>
+              <div class="collapse" id="collapse02">
+                <div class="card card-body">
+                    <textarea class="form-control form-item" name="tac2" cols="40" rows="5"
+                    placeholder="Write here....">{{faq.q2}}</textarea>
+                </div>
+              </div>
+              <a style="text-decoration:none" data-bs-toggle="collapse" href="#collapse03" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <li class="list-group-item"><b>03 - </b>Which jobs does this program prepare for?</li>
+              </a>
+              <div class="collapse" id="collapse03">
+                <div class="card card-body">
+                    <textarea class="form-control form-item" name="tac3" cols="40" rows="5"
+                    placeholder="Write here....">{{faq.q3}}</textarea>
+                </div>
+                </div>
+                <a style="text-decoration:none" data-bs-toggle="collapse" href="#collapse04" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  <li class="list-group-item"><b>04 - </b>What will I be able to do upon completing the professional
+                    certificate?</li>
+                </a>
+                <div class="collapse" id="collapse04">
+                  <div class="card card-body">
+                    <textarea class="form-control form-item" name="tac4" cols="40" rows="5"
+                    placeholder="Write here....">{{faq.q4}}</textarea>
+                  </div>
+                  </div>
+                  <a style="text-decoration:none" data-bs-toggle="collapse" href="#collapse05" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <li class="list-group-item"><b>05 - </b>Why did create this program? </li>
+                  </a>
+                  <div class="collapse" id="collapse05">
+                    <div class="card card-body">
+                              <textarea class="form-control form-item" name="tac5" cols="40" rows="5"
+                              placeholder="Write here....">{{faq.q5}}</textarea>
+                      
+                    </div>
+                    </div>
+            </ul>
+          </div>
+        </div>
+        <input type="submit" class="btn btn-primary" style="margin-bottom: 2rem;" value="Update">
+        <a href=""><div class="btn btn-outline-info" style="margin-bottom: 2rem;" >Reset</div> 
+        </a></form>
 </div>
 {% endblock %}

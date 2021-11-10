@@ -1,70 +1,116 @@
-<!--
-<body>
-    <h2>{{data.course_id}}</h2>
-    <h2>{{data.teacher_id}}</h2>
-    <h2>{{data.discriptions|safe}}</h2>
-    <h2>{{data.teacher_id}}</h2>
-    <h2>{{data.skils}}</h2>
-
-</body>-->
+{% extends 'index.html' %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/course.css' %}">
 {% block content %}
-<div class="page-hero bg-image overlay-dark" >
-    <div class="hero-section">
-      <div class="container text-center wow zoomIn">
-        <span class="subhead">Let's make your life happier</span>
-        <h1 class="display-4">{{data.name}}</h1>
-        <a href="#" class="btn btn-primary">Enroll Now</a>
-      </div>
+
+<div class="page-hero bg-image overlay-dark"
+  style="background-image:url({% static 'images/wal02.jpg' %}) ; overflow: hidden;">
+  <div class="hero-section">
+    <div class="container text-center wow zoomIn">
+      <span class="subhead">Learn And Earn without a Limit</span>
+      <h1 class="display-4">{{data.name}}</h1>
+      <a href="#" class="btn btn-primary">Enroll Now</a>
     </div>
+  </div>
 </div>
 <div class="bg-light">
-    <div class="page-section py-3 mt-md-n5 custom-index">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-4 py-3 py-md-0">
-            <div class="card-service wow fadeInUp">
-              <div class="circle-shape bg-secondary text-white">
-                <span class="mai-chatbubbles-outline"></span>
-              </div>
-              <p><span>Chat </span> with a Teacher</p>
-            </div>
+  <div class="page-section py-3 mt-md-n5 custom-index">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-4 py-3 py-md-0">
+          <div class="card-service wow fadeInUp">
+            <div class=""><img style="height: 65px;" src="{% static 'images/illu02.png' %}"></div>
+            <p><span>Chat </span> with Instructor</p>
           </div>
-          <div class="col-md-4 py-3 py-md-0">
-            <div class="card-service wow fadeInUp">
-              <div class="circle-shape bg-primary text-white">
-                <span class="mai-shield-checkmark"></span>
-              </div>
-              <p>Pre uploaded content</p>
-            </div>
+        </div>
+        <div class="col-md-4 py-3 py-md-0">
+          <div class="card-service wow fadeInUp">
+            <div class=""><img style="height: 65px;" src="{% static 'images/illu04.png' %}"></div>
+            <p>Pre uploaded content</p>
           </div>
-          <div class="col-md-4 py-3 py-md-0">
-            <div class="card-service wow fadeInUp">
-              <div class="circle-shape bg-accent text-white">
-                <span class="mai-basket"></span>
-              </div>
-              <p>Self time select</p>
-            </div>
+        </div>
+        <div class="col-md-4 py-3 py-md-0">
+          <div class="card-service wow fadeInUp">
+            <div class=""><img style="height: 65px;" src="{% static 'images/illu03.png' %}"></div>
+            <p>Shareable Certificate</p>
           </div>
         </div>
       </div>
     </div>
-<div class="page-section pb-0">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-6 py-3 wow fadeInUp">
-            <h1>Welcome to Your Health <br> Center</h1>
-            <p class="text-grey mb-4">{{data.discriptions|safe}}</p><a href="about.html" class="btn btn-primary">Enroll Now</a>
+  </div>
+  <div class="page-section pb-0">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 py-3 wow fadeInUp">
+          <div style="border: 1px solid;padding: 1rem;">
+            <h3><u>SKILLS YOU WILL GAIN</u></h3>
+            {% for skill in skils %}
+            <div>  {{skill}}</div>{% endfor %}
           </div>
-          <div class="col-lg-6 wow fadeInRight" data-wow-delay="400ms">
-            <div class="img-place custom-img-1">
-              <img src="" alt="">
-            </div>
+          <p class="text-grey mb-4">{{data.discriptions|safe}}</p><a href="about.html" class="btn btn-primary">Enroll
+            Now</a>
+        </div>
+        <div class="col-lg-6 wow fadeInRight" data-wow-delay="400ms">
+          <div class="img-place custom-img-1">
+            <img src="{% static 'images/illu01.png' %}" alt="">
           </div>
         </div>
       </div>
-    </div> 
-  </div> 
-
-{% endblock content %}
+    </div>
+  </div>
+  <div class="page-section pb-0">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 py-3 wow fadeInUp">
+          <h3><u>Frequently Asked Questions</u></h3>
+          <div>
+          <a style="text-decoration:none" data-bs-toggle="collapse" href="#collapse01" role="button" aria-expanded="false" aria-controls="collapseExample">
+                      <li class="list-group-item"><b>01 - </b> Is this course really 100% online? Do I need to attend any classes in
+                        person?</li>
+                    </a>
+                    <div class="collapse" id="collapse01">
+                      <div class="card card-body">
+                        {{faq.q1}}
+                      </div>
+                      </div>
+            <ul class="list-group list-group-flush">
+              <a style="text-decoration:none" data-bs-toggle="collapse" href="#collapse02" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <li class="list-group-item"><b>02 - </b>What background knowledge is necessary?</li>
+              </a>
+              <div class="collapse" id="collapse02">
+                <div class="card card-body">
+                  {{faq.q2}}
+                </div>
+              </div>
+              <a style="text-decoration:none" data-bs-toggle="collapse" href="#collapse03" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <li class="list-group-item"><b>03 - </b>Which jobs does this program prepare for?</li>
+              </a>
+              <div class="collapse" id="collapse03">
+                <div class="card card-body">
+                  {{faq.q3}}
+                </div>
+                </div>
+                <a style="text-decoration:none" data-bs-toggle="collapse" href="#collapse04" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  <li class="list-group-item"><b>04 - </b>What will I be able to do upon completing the professional
+                    certificate?</li>
+                </a>
+                <div class="collapse" id="collapse04">
+                  <div class="card card-body">
+                    {{faq.q4}}
+                  </div>
+                  </div>
+                  <a style="text-decoration:none" data-bs-toggle="collapse" href="#collapse05" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <li class="list-group-item"><b>05 - </b>Why did create this program? </li>
+                  </a>
+                  <div class="collapse" id="collapse05">
+                    <div class="card card-body">
+                      {{faq.q5}}
+                    </div>
+                    </div>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+   </div>
+  {% endblock content %}

@@ -2,6 +2,7 @@
 <style>
   .mbtn {
     margin: 0.5rem;
+    margin-top: 0.5rem;
   }
 
   .colapslink {
@@ -9,12 +10,65 @@
     margin: 0;
     padding: 0;
   }
+  input{
+    margin-bottom: .5rem;
+  }
 </style>
-<div class="container" style="height: 100vh">
+<div class="container" style="height:max-content;min-height: 100vh;">
   <div class="row g-3 align-items-center">
     <h3>Add Countents</h3>
-    <form action="" method="POST">
-      <div class="col-md-4">
+    <div class="dropdown col-md-4 mbtn">
+        <button
+          class="btn btn-outline-primary dropdown-togglec"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Select Content Type
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li onclick="activity(1)">
+            <a
+              class="dropdown-item"
+              data-bs-toggle="collapse"
+              href="#collapse01"
+              id="link01"
+              role="button"
+              aria-expanded="false"
+              >Text content</a
+            >
+          </li>
+          <li onclick="activity(2)">
+            <a
+              class="dropdown-item"
+              data-bs-toggle="collapse"
+              href="#collapse02"
+              id="link02"
+              role="button"
+              aria-expanded="false"
+              >Image content</a
+            >
+          </li>
+          <li onclick="activity(4)">
+            <a
+              class="dropdown-item"
+              data-bs-toggle="collapse"
+              href="#collapse04"
+              id="link04"
+              role="button"
+              aria-expanded="false"
+              >Video content</a
+            >
+          </li>
+        </ul>
+      </div>
+      
+      <div class="row">
+        <div class="collapse" id="collapse01">
+        <form action="add/text" method="POST">
+        {% csrf_token %}
+        <div class="col-md-4">
         <input
           type="text"
           class="form-control"
@@ -23,50 +77,6 @@
           placeholder="short title about the content"
         />
       </div>
-      <div class="row">
-        <a
-          class="colapslink"
-          style="text-decoration: none"
-          data-bs-toggle="collapse"
-          href="#collapse01"
-          role="button"
-          aria-expanded="false"
-        >
-          <div class="btn btn-info mbtn">Text content</div>
-        </a>
-        <a
-          style="text-decoration: none"
-          class="colapslink"
-          data-bs-toggle="collapse"
-          href="#collapse02"
-          role="button"
-          aria-expanded="false"
-        >
-          <div class="btn btn-outline-info mbtn">Image content</div>
-        </a>
-        <a
-          style="text-decoration: none"
-          class="colapslink"
-          data-bs-toggle="collapse"
-          href="#collapse03"
-          role="button"
-          aria-expanded="false"
-        >
-          <div class="btn btn-info mbtn">Image with Text</div>
-        </a>
-        <a
-          style="text-decoration: none"
-          class="colapslink"
-          data-bs-toggle="collapse"
-          href="#collapse04"
-          role="button"
-          aria-expanded="false"
-        >
-          <div class="btn btn-outline-info mbtn">Video content</div>
-        </a>
-      </div>
-      <div class="row">
-        <div class="collapse" id="collapse01">
           <div class="mb-3">
             <textarea
               class="form-control"
@@ -96,16 +106,28 @@
               placeholder="Time to complete"
             />
           </div>
+         <input type="submit" class="btn btn-primary mbtn" value="Add to week" />
+        </form>
         </div>
-
         <div class="collapse" id="collapse02">
+          <form action="add/image" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+        <div class="col-md-4">
+        <input
+          type="text"
+          class="form-control"
+          id="title1"
+          name="title1"
+          placeholder="short title about the content"
+        />
+      </div>
           <div class="mb-3">
             <input type="file" name="image" class="form-control" id="image" />
           </div>
           <div class="mb-3">
             <textarea
               class="form-control"
-              name="editor1"
+              name="editor3"
               id="image-content"
               cols="40"
               rows="5"
@@ -115,8 +137,8 @@
           <div class="mb-3">
             <textarea
               class="form-control"
-              name="editor2"
-              id="Text-content"
+              name="editor4"
+              id="Text-content2"
               cols="40"
               rows="5"
               placeholder="Add references"
@@ -125,32 +147,75 @@
           <div class="mb-3">
             <input
               type="text"
-              name="time"
+              name="time1"
               class="form-control"
-              id="time"
+              id="time1"
               placeholder="Time to complete"
             />
           </div>
+          <input type="submit" class="btn btn-primary mbtn" value="Add to week" />
+          </form>
         </div>
         <div class="collapse" id="collapse03">3</div>
         <div class="collapse" id="collapse04">
+          <form action="add/video" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+        <div class="col-md-4">
+        <input
+          type="text"
+          class="form-control"
+          id="title3"
+          name="title3"
+          placeholder="short title about the content"
+        />
+      </div>
           <div class="mb-3">
-            <input type="file" name="image" class="form-control" id="image" />
+            <input type="file" name="video" class="form-control" id="video" />
           </div>
           <div class="mb-3">
             <input
               type="text"
-              name="time"
+              name="time2"
               class="form-control"
-              id="time"
+              id="time2"
               placeholder="Time to complete"
             />
           </div>
+          <input type="submit" class="btn btn-primary mbtn" value="Add to week" />
         </div>
       </div>
-      <input type="submit" class="btn btn-primary mbtn" value="Add to week" />
-      <div class="btn btn-outline-primary mbtn">Start new week</div>
     </form>
   </div>
+  {% include "course_update.html" %}
+  
 </div>
+<script>
+  let count = 0;
+  let link01 = document.getElementById("link01");
+  let link02 = document.getElementById("link02");
+  let link03 = document.getElementById("link03");
+  let link04 = document.getElementById("link04");
+  let active;
+  function activity(n) {
+    if (count != 0) {
+      count = 0;
+      if (active == 1) {
+        console.log(active);
+        link01.click();
+      } else if (active == 2) {
+        console.log(active);
+        link02.click();
+      } else if (active == 3) {
+        link03.click();
+        console.log(active);
+      } else {
+        link04.click();
+        console.log(active);
+      }
+    } else {
+      count = count + 1;
+    }
+    active = n;
+  }
+</script>
 {% endblock %}

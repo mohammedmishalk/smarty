@@ -1,8 +1,7 @@
-{% extends 'course_management.html' %}
 {% block management %}
 {% load static %}
 <style>
-          @import url('https://fonts.googleapis.com/css2?family=Zen+Antique&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Zen+Antique&display=swap');
 
           .box {
                     width: 500px;
@@ -10,41 +9,61 @@
                     background-color: rgb(160, 220, 228);
                     border-radius: 8px;
                     margin-top:1rem;
+                    margin-bottom:1rem;
           }
 
           h3 {
                     font-family: 'Zen Antique', serif;
           }
+          .week-contents{
+            margin-top: 3rem;
+            height:max-content;
+            width: 80%;
+            background-color: rgba(255, 255, 255, 0);
+          }
+          .items{
+            display: grid;
+            justify-content: center;
+          }
 </style>
 <div class="container">
-          <div class"row">
-                    {% for week in data.week %}
-                        <h5 class="btn btn-outline-info" style="padding:0 !importent; margin-botton:0;">Week 0{{forloop.counter}} </h5>
-                    {% endfor %}
-                    </div>
-          <div class="row g-3 align-items-center">
-                    <div class="box"></div>
-                    <h3>Next Week</h3>
-                    <form action="" method="POST">
-                    {% csrf_token %}
-                              <div class="mb-3">
-                                        <label for="weekDiscription" class="form-label">Week overview</label>
-                                        <textarea class="form-control" name="editor1" id="" wdis cols="30"
-                                                  rows="10"></textarea>
-                                        <div id="dicHelp" class="form-text">Add a short discription about this week
-                                        </div>
-                              </div>
-                              <div class="col-md-4">
-                                        <label for="time" class="form-label">Time to finish</label>
-                                        <input type="number" class="form-control" id="time" name="time"
-                                                  placeholder="in hours." />
-                              </div>
-                              <input type="submit" class="btn btn-primary" style="margin-top:2rem;margin-bottom: 3rem;"
-                                        value="Create week" /></form>
-          </div>
-         
-</div>
-
-
+  <div class="box"></div>
+  <div class="row">
+    {% for week in data.week %}
+      <a class="btn btn-outline-info" data-bs-toggle="collapse" style="padding:0 !importent; margin-bottom:0; width:15%;" href="#{{week}}" role="button" aria-expanded="false" aria-controls="collapseExample">Week 0{{forloop.counter}} </a>
+    {% endfor %}
+    <a class="btn btn-primary" data-bs-toggle="collapse" style="padding:0 !importent; margin-bottom:0;width:15%;" href="#weekform" role="button" aria-expanded="false" aria-controls="collapseExample">
+      New week
+    </a>
+  </div>
+  <div class="row g-3 align-items-center collapse" id="weekform">
+    <h3>Next Week</h3>
+    <form action="" method="POST">
+      {% csrf_token %}
+        <div class="mb-3">
+          <label for="weekDiscription" class="form-label">Week overview</label>
+          <textarea class="form-control" name="editor1" id="" wdis cols="30" rows="10">
+          </textarea>
+          <div id="dicHelp" class="form-text">Add a short discription about this week</div>
+        </div>
+        <div class="col-md-4">
+          <label for="time" class="form-label">Time to finish</label>
+          <input type="number" class="form-control" id="time" name="time" placeholder="in hours." />
+        </div>
+        <input type="submit" class="btn btn-primary" style="margin-top:2rem;margin-bottom: 3rem;"
+          value="Create week" />
+    </form>
+  </div>
+ 
+  <div class="week-contents">
+    {% for item in data.week %}
+      <h3>Week 0{{forloop.counter}}</h3>
+      <div class="items">
+        {% for c in data.content %}
+          {{c}}
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
 </div>
 {% endblock %}

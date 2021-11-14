@@ -1,4 +1,3 @@
-from os import SEEK_CUR, name
 from django.db import models
 
 # Create your models here.

@@ -10,7 +10,9 @@ class textContentAdmin(admin.ModelAdmin):
 class imgContentAdmin(admin.ModelAdmin):
     list_display=('id','name','time')
 
+
 admin.site.register(models.course,courseAdmin)
+admin.site.register(models.weeks)
 
 
 admin.site.register(models.text_content,textContentAdmin)

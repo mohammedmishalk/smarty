@@ -1,5 +1,6 @@
 from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth.models import auth,User
 from accounts.models import userprofile
 from course.models import Videos, course, img_content,weeks,text_content
@@ -146,13 +147,12 @@ def course_method(request,course_id,method):
             weekDis =request.POST['editor1']
             time =request.POST['time']
             content= data.content
-            content[id]={"discription":weekDis,"time":time,"order":{}}
+            content[id]={"discription":weekDis,"time":time,"order":[]}
             week = weeks(course_id=course_id,week=weekList,content=content)
             week.save()
-            return render(request,"add_content.html",{"data":data})
+            return render(request,"add_content.html")
         else:
-            data=weeks.objects.get(pk=course_id)
-            return render(request,"add_content.html",({"data":data,}))
+            return render(request,"add_content.html")
     elif method =="P":
         data=course.objects.get(pk=course_id)
         return render(request,"te_course_view.html",({"data":data,"skils":data.skils,"faq":data.Questions,}))
@@ -185,36 +185,42 @@ def add_content(request,ty,course_id):
         user= request.user.username
         data = weeks.objects.get(pk=course_id)
         ac=len(data.week)-1
-        active_week=data.week[ac]
-        order=data.content[active_week]["order"]
-        if ty=='text':    
-            name = request.POST["title"]
-            text= request.POST["editor1"]
-            reference = request.POST["editor2"]
-            time = request.POST["time"]
-            id = contentIdGenerater(active_week,order)
-            course_data = text_content(id=id,name=name,content=text,reference=reference,time=time)
-            course_data.save()
-            data.content[active_week]["order"][id]=["text",name]
-            data.save()
-        elif ty=='image':
-            name = request.POST["title1"]
-            text= request.POST["editor3"]
-            reference = request.POST["editor4"]
-            time = request.POST["time1"]
-            id = contentIdGenerater(active_week,order)
-            course_data =img_content(id=id,name=name,text=text,Reference=reference,time=time,img=request.FILES["image"])
-            course_data.save()
-            data.content[active_week]["order"][id]=["image",name]
-            data.save()
-        elif ty=='video':
-            name=request.POST["title3"]
-            time=request.POST["time2"]
-            id = contentIdGenerater(active_week,order)
-            course_data =Videos(id=id,name=name,time=time,video=request.FILES['video'])
-            course_data.save()
-            data.content[active_week]["order"][id]=["video",name]
-            data.save()
+        if ac <0:
+            messages.error(request, 'Add a Week before adding Content')
+        else:
+            active_week=data.week[ac]
+            order=data.content[active_week]["order"]
+            if ty=='text':    
+                name = request.POST["title"]
+                text= request.POST["editor1"]
+                reference = request.POST["editor2"]
+                time = request.POST["time"]
+                id = contentIdGenerater(active_week,order)
+                id=id+'T'
+                course_data = text_content(id=id,name=name,content=text,reference=reference,time=time)
+                course_data.save()
+                data.content[active_week]["order"].append=[id]
+                data.save()
+            elif ty=='image':
+                name = request.POST["title1"]
+                text= request.POST["editor3"]
+                reference = request.POST["editor4"]
+                time = request.POST["time1"]
+                id = contentIdGenerater(active_week,order)
+                id=id+"I"
+                course_data =img_content(id=id,name=name,text=text,Reference=reference,time=time,img=request.FILES["image"])
+                course_data.save()
+                data.content[active_week]["order"].append(id)
+                data.save()
+            elif ty=='video':
+                name=request.POST["title3"]
+                time=request.POST["time2"]
+                id = contentIdGenerater(active_week,order)
+                id=id+"V"
+                course_data =Videos(id=id,name=name,time=time,video=request.FILES['video'])
+                course_data.save()
+                data.content[active_week]["order"].append(id)
+                data.save()
     return redirect("/te/mycourse/58786/U")
 
 
@@ -251,3 +257,16 @@ def weekIdGenerater(c_id):
             id = randum_id
             break
     return id
+
+def viewcourse(request,course_id):
+    data=weeks.objects.get(pk=course_id)
+    a=data.week
+    c=data.content
+    for item in a:
+        d=c[item]["order"]
+        m=d[0]
+        print(m)
+        if m.endswith('I'):
+            s=img_content.objects.get(pk=m)
+            return render(request,"view.html",{"data":s})
+        return render(request,"view.html")

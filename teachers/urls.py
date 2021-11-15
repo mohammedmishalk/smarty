@@ -17,5 +17,6 @@ urlpatterns = [
     path('editc',views.editc,name="edit cv"),
     path('mycourse/<int:course_id>/add/<str:ty>',views.add_content,name="add course content"),
     path('edits',views.edits,name="edit contact"),
+    path('view/<int:course_id>',views.viewcourse,name="view content"),
 
 ]

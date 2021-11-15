@@ -29,9 +29,6 @@
 <div class="container">
   <div class="box"></div>
   <div class="row">
-    {% for week in data.week %}
-      <a class="btn btn-outline-info" data-bs-toggle="collapse" style="padding:0 !importent; margin-bottom:0; width:15%;" href="#{{week}}" role="button" aria-expanded="false" aria-controls="collapseExample">Week 0{{forloop.counter}} </a>
-    {% endfor %}
     <a class="btn btn-primary" data-bs-toggle="collapse" style="padding:0 !importent; margin-bottom:0;width:15%;" href="#weekform" role="button" aria-expanded="false" aria-controls="collapseExample">
       New week
     </a>
@@ -53,17 +50,6 @@
         <input type="submit" class="btn btn-primary" style="margin-top:2rem;margin-bottom: 3rem;"
           value="Create week" />
     </form>
-  </div>
- 
-  <div class="week-contents">
-    {% for item in data.week %}
-      <h3>Week 0{{forloop.counter}}</h3>
-      <div class="items">
-        {% for c in data.content %}
-          {{c}}
-        {% endfor %}
-      </div>
-    {% endfor %}
   </div>
 </div>
 {% endblock %}

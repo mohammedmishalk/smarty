@@ -47,7 +47,10 @@
             {% for skill in skils %}
             <div>  {{skill}}</div>{% endfor %}
           </div>
-          <p class="text-grey mb-4">{{data.discriptions|safe}}</p><a href="about.html" class="btn btn-primary">Enroll
+          <div class="text-grey" style="height:max-content;width: 600px;overflow:hidden">
+          {{data.discriptions|safe}}
+          </div>
+          <a href="" class="btn btn-primary">Enroll
             Now</a>
         </div>
         <div class="col-lg-6 wow fadeInRight" data-wow-delay="400ms">

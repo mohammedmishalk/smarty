@@ -18,7 +18,7 @@ class course(models.Model):
 
 
 class text_content (models.Model):
-    id=models.CharField(max_length=8,null=False,unique=True,primary_key=True)
+    id=models.CharField(max_length=15,null=False,unique=True,primary_key=True)
     name = models.CharField(max_length=30,null=False)
     content =models.CharField(max_length=1000,null=False)
     reference = models.CharField(max_length=255)
@@ -27,7 +27,7 @@ class text_content (models.Model):
     
 
 class img_content (models.Model):
-    id = models.CharField(max_length=8,null=False,unique=True,primary_key=True)
+    id = models.CharField(max_length=15,null=False,unique=True,primary_key=True)
     name = models.CharField(max_length=30,null=False)
     img = models.ImageField(upload_to='content/')
     text = models.CharField(max_length=1000,null=False)

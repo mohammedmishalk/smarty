@@ -12,7 +12,6 @@
         <div class="table-container" style="margin-left: 1.5rem;">
           <h2>Certification Courses</h2>
           <table class="table table-hover">
-            <thead>
               <tr>
                 <th class="table-primary" scope="col">#</th>
                 <th class="table-primary" scope="col">Course ID</th>
@@ -20,55 +19,49 @@
                 <th class="table-primary" scope="col">Enroled</th>
                 <th class="table-primary" scope="col">Completed</th>
                 <th class="table-primary" scope="col">Rating</th>
-                <th class="table-primary" scope="col">Link</th>
+                <th class="table-primary" scope="col">Link <span class="text-muted" style="font-size:13px;">  (click to copy)</span></th>
                 <th scope="col"></th>
               </tr>
-            </thead>
-            <tbody>
               {% for course in courses %}
               
-              <tr onclick="courseSelection({{course.course_id}})">
+              <tr>
                 <th scope="row">{{forloop.counter}}</th>
-                <td>{{course.course_id}}</td>
-                <td>{{course.name}}</td>
-                <td>{{course.enroled}}</td>
-                <td>{{course.completed}}</td>
-                <td>{{course.rating}}</td>
-                <td onclick="LinkCopy({{course.course_id}})">http://127.0.0.1:8000/course/{{course.course_id}}</td>
+                <td onclick="courseSelection({{course.course_id}})">{{course.course_id}}</td>
+                <td onclick="courseSelection({{course.course_id}})">{{course.name}}</td>
+                <td onclick="courseSelection({{course.course_id}})">{{course.enroled}}</td>
+                <td onclick="courseSelection({{course.course_id}})">{{course.completed}}</td>
+                <td onclick="courseSelection({{course.course_id}})">{{course.rating}}</td>
+                <td onclick="LinkCopy({{course.course_id}},1)">http://127.0.0.1:8000/course/{{course.course_id}}</td>
                 <td><Button class="btn btn-danger">delete</Button></td>
               </tr>
               {% endfor %}
-            </tbody>
           </table>
           <div class="table-container">
             <h2>Regular class</h2>
             <table class="table table-hover">
-              <thead>
                 <tr>
                   <th class="table-primary" scope="col">#</th>
+                  <th class="table-primary" scope="col">Institution</th>
                   <th class="table-primary" scope="col">Subject ID</th>
                   <th class="table-primary" scope="col">Subject Name</th>
                   <th class="table-primary" scope="col">Enroled</th>
-                  <th class="table-primary" scope="col">lessons</th>
-                  <th class="table-primary" scope="col">tests</th>
-                  <th class="table-primary" scope="col">Link</th>
+                  <th class="table-primary" scope="col">class & div</th>
+                  <th class="table-primary" scope="col">shareable ID <span class="text-muted" style="font-size:13px;">  (click to copy)</span></th>
                   
                   <th scope="col"></th>
                 </tr>
-              </thead>
-              <thead>
-                <tbody>
+                {% for class in rclass %}
                   <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>http://127.0.0.1:8000/course/{{course.course_id}}</td>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{class.institution}}</td>
+                    <td>{{class.class_id}}</td>
+                    <td>{{class.name}}</td>
+                    <td>{{class.enroled}}</td>
+                    <td>{{class.classDiv}}</td>
+                    <td><input type="password" value="{{class.hash}}" style="background-color:rgba(255, 255, 240, 0)" onclick="LinkCopy('{{class.hash}}',2)" readonly/></td>
                     <td><Button class="btn btn-danger">delete</Button></td>
                   </tr>
-              </thead>
+                  {% endfor %}
 
         </div>
         {% else %}
@@ -82,8 +75,15 @@
       function courseSelection(id){
         window.location = "/te/mycourse/"+id;
       }
-      function LinkCopy(id){
-         navigator.clipboard.writeText("http://127.0.0.1:8000/course/"+id);
+      function LinkCopy(id,n){
+        if (n==1){
+          navigator.clipboard.writeText("http://127.0.0.1:8000/course/"+id);
+          alert("link copied");
+        }else {
+          navigator.clipboard.writeText(id);
+          alert("Shareable ID copied");
+        }
+         
          
       }
     </script>

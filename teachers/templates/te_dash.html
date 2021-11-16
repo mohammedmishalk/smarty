@@ -1,14 +1,149 @@
 {% extends 'tea_theme.html' %}
   {% block content %}
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/te_dash.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/card.css' %}">
-
-    </head>
-    <div class="container-fluid">
+    <style>
+      .data-div01{
+        height: 180px;
+        background-color: lightseagreen;
+        border-radius: 8px;
+        margin: .8rem;
+        padding: 0;
+      }
+      .data-div02{
+        height: 180px;
+        background-color: rgb(245, 164, 99) ;
+        border-radius: 8px;
+        margin: .8rem;
+        padding: 0;
+      }
+      .data-div03{
+        height: 180px;
+        background-color: rgb(241, 83, 83) ;
+        border-radius: 8px;
+        margin: .8rem;
+        padding: 0;
+      }
+      .header {
+        display: grid;
+        height: 150px;
+        margin: 0;
+        margin-left: .5rem;
+        background-color: #E4E9F7;
+      }
+      .footer {
+        display: grid;
+        align-content: center;
+        height: 30px;
+        margin: 0;
+        padding: 1.6rem;
+        margin-left: .5rem;
+        background-color: #E4E9F7;
+      }
+    </style>
+    
+    <div class="container">
       <div class="col-12">
-        <div class="row justify-content-end"><i></i>
-          dash board
+        <div class="row">
+          <h3 style="margin-top: 1.5rem;"> Dashboard</h3>
+      </div>
+      <div class="row">
+        <div class="col-9 col-sm-5 col-lg-5 col-xl-3 data-div01">
+          <div class="footer">
+            <h5>Course hosted</h5>
+          </div>
+          <div class="header">
+            
+          </div>
+          
+        </div>
+        <div class="col-9 col-sm-5 col-lg-5 col-xl-3 data-div01">
+          <div class="footer">
+            <h5>Totel Students</h5>
+          </div>
+          <div class="header"></div>
+          
+        </div>
+        <div class="col-9 col-sm-5 col-lg-5 col-xl-3 data-div01">
+          <div class="footer">
+            <h5>Complition rate</h5>
+          </div>
+          <div class="header"></div>
+          
+        </div>
+        <div class="col-9 col-sm-5 col-lg-5 col-xl-2 data-div01">
+          <div class="footer">
+            <h5>Rating</h5>
+          </div>
+          <div class="header"></div>
+          
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-9 col-sm-5 col-lg-5 col-xl-3 data-div02">
+          <div class="footer">
+            <h5>Regular clases</h5>
+          </div>
+          <div class="header">
+            
+          </div>
+          
+        </div>
+        <div class="col-9 col-sm-5 col-lg-5 col-xl-3 data-div02">
+          <div class="footer">
+            <h5>Totel Students</h5>
+          </div>
+          <div class="header"></div>
+          
+        </div>
+        <div class="col-9 col-sm-5 col-lg-5 col-xl-3 data-div02">
+          <div class="footer">
+            <h5>Attendense</h5>
+          </div>
+          <div class="header"></div>
+          
+        </div>
+        <div class="col-9 col-sm-5 col-lg-5 col-xl-2 data-div02">
+          <div class="footer">
+            <h5>Rating</h5>
+          </div>
+          <div class="header"></div>
+          
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-9 col-sm-5 col-lg-5 col-xl-3 data-div03">
+          <div class="footer">
+            <h5>Skill tests</h5>
+          </div>
+          <div class="header">
+            
+          </div>
+          
+        </div>
+        <div class="col-9 col-sm-5 col-lg-5 col-xl-3 data-div03">
+          <div class="footer">
+            <h5>Participents</h5>
+          </div>
+          <div class="header"></div>
+          
+        </div>
+        <div class="col-9 col-sm-5 col-lg-5 col-xl-3 data-div03">
+          <div class="footer">
+            <h5>Average score</h5>
+          </div>
+          <div class="header"></div>
+          
+        </div>
+        <div class="col-9 col-sm-5 col-lg-5 col-xl-2 data-div03">
+          <div class="footer">
+            <h5>Rating</h5>
+          </div>
+          <div class="header"></div>
+          
+        </div>
+
       </div>
 
     </div>

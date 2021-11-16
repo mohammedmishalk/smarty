@@ -5,24 +5,46 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/add.css' %}">
 </head>
-<div class="container-fluid col-11 col-md-10 col-lg-10">
+<div class="container-fluid col-11 col-md-10 col-lg-10" style="margin-top: 1.3rem;">
     <nav class="navbar navbar-light">
         <form class="form-inline">
-            <button class="btn btn-outline-primary" type="button">Course</button>
-            <button class="btn btn-outline-primary" type="button">Regular Class</button>
+            <button class="btn btn-outline-primary" type="button" onclick="hideview(1)">Course</button>
+            <button class="btn btn-outline-primary" type="button" onclick="hideview(2)">Regular Class</button>
         </form>
     </nav>
-    <div class="row" style="height:100vh;">
-        <div class="col col-11 col-sm-11 col-md-7 col-lg-8" style="overflow: scroll; height: 100vh;">
+        <div class="col col-11 col-sm-11 col-md-10 col-lg-10" id="course">
             {% block add_course_form %}
 
             {% endblock %}
 
         </div>
-        <div class="col col-12 col-md-4 col-lg-3 learn">
-            <div class="">
-                <p>How to start a course?</p>
-            </div>
+        <div class="col col-11 col-sm-11 col-md-7 col-lg-8 hidden-items" id="regular">
+            <form action="regular" method="POST">
+                {% csrf_token %}
+                <div class="col-md-8">
+                    <label for="time" class="form-label">Institution name</label>
+                    <input type="text" class="form-control" id="institution-name" name="institution" required/>
+                </div>
+                <div class="col-md-8">
+                    <label for="time" class="form-label">class,dev</label>
+                    <input type="text" class="form-control" id="class" name="class" placeholder="seperate with space"/>
+                </div>
+                <div class="col-md-8">
+                    <label for="time" class="form-label">Subject</label>
+                    <input type="text" class="form-control" id="name" name="name" required/>
+                </div>
+                <div class="col-md-8">
+                    <label for="" class="form-label">expecting Strungth</label>
+                <select class="form-select" name="students" aria-label="Default select example">
+                    <option selected>0</option>
+                    <option value="100 > ">100 or more</option>
+                    <option value="50-100">50-100</option>
+                    <option value="50">less than 50</option>
+                  </select>
+                </div>
+                <input type="submit" class="btn btn-primary" style="margin-top: .5rem;"value="Start" />
+            </form>
+
         </div>
     </div>
 </div>
@@ -35,6 +57,16 @@
         b.value = "";
 
     }
+    function hideview(n){
+        if (n==2){
+            document.getElementById("course").classList.add("hidden-items")
+            document.getElementById("regular").classList.remove("hidden-items")
+        }else{
+            document.getElementById("course").classList.remove("hidden-items")
+            document.getElementById("regular").classList.add("hidden-items")
+        }
+    }
+    
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="{% static 'js/add.js' %}"></script>

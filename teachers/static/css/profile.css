@@ -21,12 +21,9 @@ p {
 
 .card-container {
 	height: 680px;
-    margin-left: .5rem;
-    margin-right: .5rem;
-    float: left;
-    margin-top: 2.5rem;
+    	float: left;
+    	margin-top: 2.5rem;
 	background-color: #231E39;
-	border-radius: 5px;
 	box-shadow: 0px 10px 20px -10px rgba(0,0,0,0.75);
 	color: #B3B8CD;
 	padding-top: 30px;
@@ -41,7 +38,7 @@ p {
 	font-weight: bold;
 	padding: 3px 7px;
 	position: absolute;
-	top: 30px;
+	top: 60px;
 	left: 30px;
 }
 .filebtn{
@@ -154,3 +151,51 @@ button.primary.ghost {
 	margin: 0 7px 7px 0;
 	padding: 7px;
 }
+.profile-pic {
+	color: transparent;
+	transition: all 0.3s ease;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	margin-top: 5rem !important;
+	margin-bottom: 5rem !important;
+      
+      }
+      
+      .profile-pic input {
+	display: none;
+      }
+      
+      .profile-pic img {
+	position: absolute;
+	object-fit: cover;
+	width: 165px;
+	height: 165px;
+	border-radius: 100px;
+	z-index: 0;
+      }
+      
+      .profile-pic -label {
+	cursor: pointer;
+	height: 165px;
+	width: 165px;
+      }
+      .profile-pic:hover .-label{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(0, 0, 0, 0.8);
+	z-index: 10000;
+	color: #fafafa;
+	transition: background-color 0.2s ease-in-out;
+	border-radius: 100px;
+	margin-bottom: 0;
+      }
+      
+      .profile-pic span {
+	display:inline-flex;
+	padding: 0.2em;
+	height: 2em;
+      }
+      

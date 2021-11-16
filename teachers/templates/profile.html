@@ -4,7 +4,14 @@
 <div class="view" style="margin-left: .8rem; background-color: #E4E9F7;">
 		<div class="card-container col-11 col-sm-6 col-md-6 col-lg-3">
 			<span class="pro">TEACHER</span>
-		<img class="round" src="{{user.img.url}}" alt="user" />
+			<div class="profile-pic">
+				<label class="-label" for="file">
+				    <span class="glyphicon glyphicon-camera"></span>
+				    <span>Change Image</span>
+				</label>
+				<input type="file" name="" id="file" onchange="loadFile(event)"/>
+				<img src="test.jpg" id="output" width="200" />
+			      </div>
 		<h3>{{user.username}}</h3>
 		<h6>{{cv.domain}}</h6>
 		<p>{{cv.bio}}</p>
@@ -33,8 +40,6 @@
 			<form action="edit" method="POST" enctype="multipart/form-data">
 				{% csrf_token %}
 					<h5>My Account</h5>
-					<label for="icon" class="labelfor">Profile photo</label>
-					<input class="form-control form-account" style="margin-left: 1rem;" name="photo" type="file" id="formFile">
 					<label for="fname" class="labelfor">Full name</label>
 					<input type="text" name="name" id="fname" class="form-account" value="{{user.full_name}}" required/>
 					<label for="address" class="labelfor">Current address</label>
@@ -43,8 +48,7 @@
 					<input type="date" name="dob" id="dob" class="form-account" required/>
 					<label for="fname" class="labelfor">Email</label>
 					<input type="emile" name="email" id="email" value="{{user.email}}" class="form-account" required/>
-					<label for="password" class="labelfor hidden-pass">Password</label>
-					<input type="password" name="pass" id="pas" class="form-account hidden-pass"/>
+					
 					<input type="submit" class="sub" value="Submit">
 					<button class="primary ghost">
 						Reset
@@ -68,7 +72,7 @@
 					</button>
 					</form>
 		</div>
-		<div class="card-container col-11 col-sm-5 col-md-5 col-lg-2">
+		<div class="card-container col-11 col-sm-5 col-md-5 col-lg-3">
 			<form action="edits" method="POST">
 				{% csrf_token %}
 					<h5>Social accounts</h5>
@@ -89,7 +93,12 @@
 		</div>
 
 </div>
-
+<script>
+	var loadFile=function(event){
+	    var image=document.getElementById("output");
+  
+	}
+      </script>
 
 
 {% endblock %}

@@ -15,6 +15,15 @@ class course(models.Model):
     skils = models.JSONField()
     Questions = models.JSONField(default=dict)
 
+class regularclass(models.Model):
+    class_id = models.CharField(max_length=255,null=False,unique=True,primary_key=True)
+    teacher_id=models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
+    institution = models.CharField(max_length=100)
+    classDiv = models.CharField(max_length=20)
+    students =models.ImageField()
+    enroled = models.IntegerField(default=0)
+    hash = models.CharField(max_length=32,default=0)
 
 
 class text_content (models.Model):

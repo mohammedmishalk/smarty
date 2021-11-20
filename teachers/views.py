@@ -232,6 +232,10 @@ def course_method(request, course_id, method):
 def add_content(request, ty, course_id):
     if request.method == 'POST':
         user = request.user.username
+        if weeks.objects.filter(course_id=course_id).exists():
+            data = weeks.objects.get(pk=course_id)
+        else:
+            w = weeks.objects.get_or_create(pk=course_id)
         data = weeks.objects.get(pk=course_id)
         ac = len(data.week)-1
         if ac < 0:
@@ -249,7 +253,7 @@ def add_content(request, ty, course_id):
                     reference=request.POST["editor2"],
                     time=request.POST["time"])
                 course_data.save()
-                data.content[active_week]["order"].append = [id]
+                data.content[active_week]["order"].append(id)
                 data.save()
             elif ty == 'image':
                 id = contentIdGenerater(active_week, order)

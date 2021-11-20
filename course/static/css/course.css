@@ -13,6 +13,8 @@
 
 .hero-section,
 .banner-section {
+  height: 200px;
+  background-image: linear-gradient(to right, #2b68db , #62a9d8);
   position: relative;
   display: -ms-flexbox;
   display: flex;

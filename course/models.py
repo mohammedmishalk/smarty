@@ -29,7 +29,7 @@ class regularclass(models.Model):
 class text_content (models.Model):
     id=models.CharField(max_length=15,null=False,unique=True,primary_key=True)
     name = models.CharField(max_length=30,null=False)
-    content =models.CharField(max_length=1000,null=False)
+    content =models.JSONField()
     reference = models.CharField(max_length=255)
     time = models.IntegerField()
  

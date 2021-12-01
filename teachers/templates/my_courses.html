@@ -20,7 +20,6 @@
                 <th class="table-primary" scope="col">Completed</th>
                 <th class="table-primary" scope="col">Rating</th>
                 <th class="table-primary" scope="col">Link <span class="text-muted" style="font-size:13px;">  (click to copy)</span></th>
-                <th scope="col"></th>
               </tr>
               {% for course in courses %}
               
@@ -32,7 +31,6 @@
                 <td onclick="courseSelection({{course.course_id}})">{{course.completed}}</td>
                 <td onclick="courseSelection({{course.course_id}})">{{course.rating}}</td>
                 <td onclick="LinkCopy({{course.course_id}},1)">http://127.0.0.1:8000/course/{{course.course_id}}</td>
-                <td><Button class="btn btn-danger">delete</Button></td>
               </tr>
               {% endfor %}
           </table>
@@ -47,8 +45,6 @@
                   <th class="table-primary" scope="col">Enroled</th>
                   <th class="table-primary" scope="col">class & div</th>
                   <th class="table-primary" scope="col">shareable ID <span class="text-muted" style="font-size:13px;">  (click to copy)</span></th>
-                  
-                  <th scope="col"></th>
                 </tr>
                 {% for class in rclass %}
                   <tr>
@@ -59,7 +55,6 @@
                     <td>{{class.enroled}}</td>
                     <td>{{class.classDiv}}</td>
                     <td><input type="password" value="{{class.hash}}" style="background-color:rgba(255, 255, 240, 0)" onclick="LinkCopy('{{class.hash}}',2)" readonly/></td>
-                    <td><Button class="btn btn-danger">delete</Button></td>
                   </tr>
                   {% endfor %}
 

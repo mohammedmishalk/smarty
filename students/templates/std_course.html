@@ -1,6 +1,79 @@
 {% extends 'std_theme.html' %}
   {% block content %}
     {% load static %}
-    <div><h1>Course</h1></div>
+    <style>
+      h2{
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      }
+      #message{
+        background-color: red;
+        color: #fff;
+        padding: .5rem;
+        width:max-content;
+        border-radius: 5px;
+        box-shadow: 1px 1px #888888;
+      }
+      #messageDiv{
+        width: 100%;
+        display: grid;
+        justify-content: center;
+        margin-top: .6rem;
+      }
+      .table-div{
+        margin-top: 2rem;
+      }
 
+    </style>
+    <div class="">
+      <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand"><h2>Course Dashboard</h2></a>
+          <form class="d-flex" action="search" method="get">
+            <div class="col col-md-2">
+              <select class="form-select" name="type" id="inputGroupSelect01">
+                <option value="1">ID</option>
+                <option value="2">Name</option>
+                <option value="3">keyword</option>
+              </select></div>
+            <input class="form-control me-2" type="search" name="keyword" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+      {% if messages %}
+      {% for message in messages %}
+      <div id="messageDiv">
+        <div id ="message">{{ message }} </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+    
+      {% if data %}
+      <div class="container table-div">
+      <table class="table table-hover">
+        <tr>
+        <th class="table-warning">Course ID</th>
+        <th class="table-warning">Course name</th>
+        <th class="table-warning">Teacher name</th>
+        <th class="table-warning">Time to complet</th>
+        <th class="table-warning">Totel Enroled</th>
+        <th class="table-warning">Rating</th></tr>
+        <tr onclick="Course_view({{data.course_id}})">
+          <td>{{data.course_id}}</td>
+          <td>{{data.name}}</td>
+          <td>{{teacher.full_name}}</td>
+          <td>{{data.time}}</td>
+          <td>{{data.enroled}}</td>
+          <td>{{data.rating}}</td>
+
+        </tr>
+      </table></div>
+      {% endif %}
+    
+    </div>
+  <script>
+    function Course_view (id){
+      window.location ="/st/course/"+id;
+    }
+  </script>
     {% endblock %}

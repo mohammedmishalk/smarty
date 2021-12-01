@@ -1,96 +1,103 @@
 {% extends 'std_theme.html' %}
   {% block content %}
-    {% load static %}
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-      <link rel="stylesheet" type="text/css" href="{% static 'css/std_acc.css' %}">
-  </head>
-      <div class="container-fluid">
-        <div class="right col-12 col-sm-4 col-md-3 col-lg-3 col-xl-2 align-items-center">
-          <div class="card-group">
-            <div class="card" style="background-color:#E4E9F7;">
-              <img src="{{user.img.url}}" class="pimg" style="padding: 1.6rem;padding-bottom: 0;">
-                <div class="card-body">
-                  <h5 class="card-title">{{user.full_name}}</h5>
-                  <p class="title">{{user.subtitle}}</p>
-                  <p class="card-text">{{user.bio}}</p>
-                  <p><a href="edit"><button>edit</button></a></p>
-                </div>
-                <div class="card-footer" style="background-color: #1d1b31;border-radius: 20px;margin-right:.5rem; margin-left:.5rem ;">
-                  <small class="text-muted"></small>
-                  </div>
-            </div>
+  {% load static %}
+      <div class="view" style="margin-left: .8rem; background-color: #E4E9F7;">
+		<div class="card-container col-11 col-sm-6 col-md-6 col-lg-3">
+			<span class="pro">Student</span>
+				<img class="round" src="{{user.img.url}}" alt="user" required />
+
+		<h3>{{user.username}}</h3>
+		<h6>{{cv.domain}}</h6>
+		<p>{{cv.bio}}</p>
+		<div class="buttons">
+			<button class="primary">
+				Message
+			</button>
+			<button class="primary ghost">
+				Following
+			</button>
+		</div>
+		<div class="skills">
+			<h6>Skills</h6>
+			<ul>
+				<li>UI / UX</li>
+				<li>Front End Development</li>
+				<li>HTML</li>
+				<li>CSS</li>
+				<li>JavaScript</li>
+				<li>React</li>
+				<li>Node</li>
+			</ul>
+		</div>
+		</div>
+		<div class="card-container col-11 col-sm-5 col-md-5 col-lg-3">
+			<form action="edit" method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+					<h5>My Account</h5>
+          <div class="mb-3">
+            <label for="formFile" class="form-label"></label>
+            <input class="form-control" type="file" name="profile" id="formFile">
           </div>
-        </div>
-        </div>
-        <div class="left col-12 col-sm-8 col-md-9 col-lg-9 col-xl-10"> 
-          <div class="row"> 
-          </div>
-          <div>
-            <h3 class="info"> INFORMATION </h3>
-            <hr id="info_hr">
-            <div class="container" style="margin-left: 2.5rem;">
-              <div class="panel_left col-12 col-sm-12 col-md-6">
-                <p class="hed" style="margin-bottom:0.5rem;">Username </p>
-                <p class="cont">{{user.username}}</p>
-                <p class="hed" style="margin-bottom:0.5rem;">Email</p>
-                <p class="cont">{{user.email}}</p>
-                <p class="hed" style="margin-bottom:0.5rem;">Phone number</p>
-                <p class="cont" >{{user.phone_number}}</p>
-                <p class="hed" style="margin-bottom:0.5rem;">Address</p>
-                <p class="cont">{{user.address}}</p>
-              </div>  
-              <div class="panel_right">
-                <div class="item">
-                  <p class="course" >Courses</p>
-                  <hr class="cou_hr" style="width: 20%;height: 10px; color:midnightblue;">
-                </div>
-                <div class="item-body">
-                  <div class="item-body-content">
-                    <div class="span">
-                      <span>Web Usabilty Testing</span>
-                      <i class="fa fa-angle-right">  </i>
-                    </div><br>
-                  <div class="span">
-                    <span>Web Usabilty Testing </span>
-                    <i class="fa fa-angle-right">  </i>
-                  </div>
-                </div>
-                <div class="item">
-                  <p class="course" style="margin-top: 1rem;" >Regular class</p>
-                  <hr class="cou_hr" style="width: 20%;height: 10px;color: midnightblue;">
-                </div>
-                <div class="item-body">
-                  <div class="item-body-content">
-                    <div class="span">
-                      <span>Web Usabilty Testing </span>
-                      <i class="fa fa-angle-right">  </i>
-                    </div><br>
-                  <div class="span">
-                    <span>Web Usabilty Testing </span>
-                    <i class="fa fa-angle-right">  </i>
-                  </div>
-                  </div>
-              </div>
-              </div> 
-            </div>
-          </div>
-        </div>
-        <div class="footer col-12 col-md-12">
-          <div class="contact col-12 col-md-4 ">
-            <p style="color:#11101d; font-size: 20px; font-weight: 600;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Conect with</p>
-            <i class='bx bxl-instagram-alt social'></i>
-            <i class='bx bxl-twitter social' ></i>
-            <i class='bx bxl-youtube social' ></i>
-            <i class='bx bxl-facebook-circle social' ></i>
-        </div>
-        <div class="skil col-12 col-md-4">
-          <p style="color:#11101d; font-size: 20px; font-weight: 600;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">badge</p>
-          <i class='bx bxl-instagram-alt social'></i>
-          <i class='bx bxl-twitter social' ></i>
-          <i class='bx bxl-youtube social' ></i>
-          <i class='bx bxl-facebook-circle social' ></i>
-        </div>
-        </div>
-      </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-    {% endblock%}
+					<label for="fname" class="labelfor">Full name</label>
+					<input type="text" name="name" id="fname" class="form-account" value="{{user.full_name}}" required/>
+					<label for="address" class="labelfor">Current address</label>
+					<textarea name="add" id="area" class="notes" cols="35" rows="4">{{user.address}}</textarea>
+					<label for="dob" class="labelfor">Date of Birth {{user.DOB}}</label>
+					<input type="date" name="dob" id="dob" class="form-account" required/>
+					<label for="fname" class="labelfor">Email</label>
+					<input type="emile" name="email" id="email" value="{{user.email}}" class="form-account" required/>
+					
+					<input type="submit" class="sub" value="Submit">
+					<button class="primary ghost">
+						Reset
+					</button>
+				</form>
+		</div>
+		<div class="card-container col-11 col-sm-6 col-md-6 col-lg-3">
+			<form action="editc" method="POST">
+				{% csrf_token %}
+					<label for="Domain" class="labelfor">Job Domain</label>
+					<input type="text" name="sub" id="sub" value="{{cv.domain}}" class="form-account"/>
+					<label for="bio" class="labelfor">bio</label>
+					<textarea name="bio" class="notes" rows="3" placeholder="Add bio...">{{cv.bio}}</textarea>
+					<label for="Qu" class="labelfor">Qualifications</label>
+					<textarea name="Qu" class="notes" rows="5" placeholder="briefly describe your Qualifications...">{{cv.qu}}</textarea>
+					<label for="Ex" class="labelfor">Experience</label>
+					<textarea name="Ex" class="notes" rows="5" placeholder="briefly describe your Experience...">{{cv.ex}}</textarea>
+				<input type="submit" class="sub" value="Submit">
+					<button class="primary ghost">
+						Reset
+					</button>
+					</form>
+		</div>
+		<div class="card-container col-11 col-sm-5 col-md-5 col-lg-3">
+			<form action="edits" method="POST">
+				{% csrf_token %}
+					<h5>Social accounts</h5>
+					<input type="text" name="fb" placeholder="facebook" value="{{contact.facebook}}" class="form-account" />
+					<input type="text" name="insta" placeholder="instagram" value="{{contact.instagram}}" class="form-account" />
+					<input type="text" name="twit" placeholder="twitter" value="{{contact.twitter}}" class="form-account" />
+					<input type="text" name="in" placeholder="linkedin" value="{{contact.linked_in}}" class="form-account" />
+					<h5 style="margin-top: 1rem;"> Sources</h5>
+					<input type="text" name="yt" placeholder="youtube" value="{{contact.youtube}}" class="form-account" />
+					<input type="text" name='hub' placeholder="github" value="{{contact.github}}" class="form-account"/>
+					<input type="text" name="lab" placeholder="gitlab" value="{{contact.gitlab}}" class="form-account"/>
+					<input type="text" name="web" placeholder="website" value="{{contact.website}}" class="form-account"/>
+					<input type="submit" class="sub" value="Submit">
+					
+		
+				</form>	
+		
+		</div>
+
+</div>
+<script>
+	var loadFile=function(event){
+	    var image=document.getElementById("output");
+  
+	}
+      </script>
+
+      
+  
+  {% endblock%}

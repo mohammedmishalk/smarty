@@ -2,10 +2,9 @@ from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import auth, User
 from django.contrib import messages
-from .models import usernameConvart,userprofile
-from teachers import models
+from .models import userprofile, contact, Quality
 
-# Create your views here.
+
 def home(request):
     return render(request,"home.html")
 def user(request):
@@ -18,12 +17,7 @@ def register(request):
         email = request.POST['email']
         img = "images/example3.jpg"
         password =f"smarty{request.POST['password']}"
-        selection =request.POST['select']
-        select = 0
-        if selection == 1:
-            select = 1
-        else:
-            select = 0
+        select =request.POST['select']
         # user validation and register
         if User.objects.filter(username=username).exists():
             messages.error(request, "username already taken")
@@ -38,14 +32,8 @@ def register(request):
 
             # automatic login 
             user_log = auth.authenticate(username=username,password=password)
-            c=""
-            for i in username:
-                c+=str(ord(i))
-            new_username = hex(int(c))
-            new_um = usernameConvart(username=username,new_username=new_username)
-            new_um.save()
-            co = models.contact.objects.get_or_create(pk=username)
-            qu = models.Quality.objects.get_or_create(pk=username)
+            co =contact.objects.get_or_create(pk=username)
+            qu =Quality.objects.get_or_create(pk=username)
             if user_log is not None:
                 auth.login(request, user_log)
                 return redirect(f'st/dash')
@@ -61,7 +49,6 @@ def login(request):
         password = f"smarty{request.POST['password']}" 
         user = auth.authenticate(username=username, password=password)
         if user is not None:
-            n = usernameConvart.objects.get(pk=username)
             auth.login(request,user)
             return redirect(f'st/dash')
 
@@ -75,8 +62,6 @@ def logout(request):
     auth.logout(request)
     return redirect('/')
 
-def contact(request):
-    return render(request,"contact.html")
 
 def about(request):
     return render(request,"about.html")

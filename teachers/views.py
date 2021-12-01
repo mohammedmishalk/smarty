@@ -2,9 +2,8 @@ from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import auth, User
-from accounts.models import userprofile
-from course.models import Videos, course, img_content, weeks, text_content, regularclass
-from . import models
+from accounts.models import userprofile, contact, Quality
+from course.models import Videos, course, img_content, weeks, text_content, regularclass, contentOrder
 import random
 
 def dashboard(request):
@@ -41,7 +40,9 @@ def edit(request):
         return render(request, "te_edit.html")
     elif request.method == "POST":
         personal_data = userdata(user)
+        profileData = userprofile.objects.get(pk=user)
         userprof = userprofile(
+            img=request.FILES["profile"],
             full_name=request.POST["name"],
             email=request.POST["email"],
             address=request.POST["add"],
@@ -58,7 +59,7 @@ def editc(request):
     user = request.user.username
     if request.method == "POST":
         personal_data = userdata(user)
-        cv = models.Quality(
+        cv = Quality(
             username=user,
             domain=request.POST["sub"],
             bio=request.POST["bio"],
@@ -72,7 +73,7 @@ def edits(request):
     user = request.user.username
     if request.method == "POST":
         personal_data = userdata(user)
-        contact = models.contact(
+        cont = contact(
             username=user,
             facebook=request.POST["fb"],
             instagram=request.POST["insta"],
@@ -81,8 +82,7 @@ def edits(request):
             youtube=request.POST["yt"],
             github=request.POST["hub"],
             gitlab=request.POST["lab"],
-            website=request.POST["web"])
-        contact.save()
+            website=request.POST["web"]).save()
         return redirect(f'/te/userp')
     else:
         return HttpResponse("not working")
@@ -94,12 +94,12 @@ def userdata(username):
 
 
 def cvdata(username):
-    c_data = models.Quality.objects.get(pk=username)
+    c_data = Quality.objects.get(pk=username)
     return c_data
 
 
 def contactdata(username):
-    codata = models.contact.objects.get(pk=username)
+    codata = contact.objects.get(pk=username)
     return codata
 
 
@@ -132,7 +132,7 @@ def add_course(request):
         cs = course(
             course_id=id,
             teacher_id=u,
-            name=request.POST['cname'],
+            name=request.POST['cname'].lower(),
             time=td,
             discriptions=request.POST['editor1'],
             skils=skils,
@@ -177,7 +177,7 @@ def course_management(request, course_id):
 
 def course_method(request, course_id, method):
     user = request.user.username
-    if method == "U":
+    if method == 1 :
         if request.method == 'POST':
             if weeks.objects.filter(course_id=course_id).exists():
                 data = weeks.objects.get(pk=course_id)
@@ -186,27 +186,30 @@ def course_method(request, course_id, method):
             data = weeks.objects.get(pk=course_id)
             id = weekIdGenerater(course_id)
             weekList = data.week
-            weekList.append(id)
-            weekDis = request.POST['editor1']
-            time = request.POST['time']
-            content = data.content
-            content[id] = {"discription": weekDis, "time": time, "order": []}
-            week = weeks(course_id=course_id, week=weekList, content=content)
-            week.save()
-            return render(request, "add_content.html")
+            new_week={
+                "week_id":id,
+                "overview":request.POST['editor1'],
+                "time":request.POST['time']
+            }
+            weekList.append(new_week)
+            data.save()
+            order = contentOrder(week=id,order=[]).save()
+            data = weeks.objects.get(pk=course_id)
+            return render(request, "add_content.html", {"data":data})
         else:
-            return render(request, "add_content.html")
-    elif method == "P":
+            data = weeks.objects.get(pk=course_id)
+            return render(request, "add_content.html",{"data":data})
+    elif method == 3:
         data = course.objects.get(pk=course_id)
         return render(request,
                       "te_course_view.html",
                       ({"data": data,
                         "skils": data.skils,
                         "faq": data.Questions, }))
-    elif method == "D":
+    elif method == 4:
         # deleteCourse(request)
         return redirect("/te/mycourse")
-    elif method == "E":
+    elif method == 2:
         data = course.objects.get(pk=course_id)
         if request.method == 'POST':
             skils = data.skils
@@ -280,6 +283,11 @@ def add_content(request, ty, course_id):
                 data.content[active_week]["order"].append(id)
                 data.save()
     return redirect("/te/mycourse/58786/U")
+
+def week_content_view(request,course_id,week):
+    data = weeks.objects.get(pk=course_id)
+    context = {"data":data}
+    return render(request, "week_item.html",context)
 
 
 def contentIdGenerater(n, c):

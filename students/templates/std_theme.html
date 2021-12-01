@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smarty Students</title>
     {% load static %}
     <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
     <link rel="stylesheet" href="{% static 'css/theme.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
 </head>
 <body>
     <div class="sidebar">
@@ -23,70 +26,70 @@
                 <span class="tooltip">Search</span>
             </li>
             <li>
-                <a href="dash">
+                <a href="/st/dash">
                     <i class='bx bx-grid-alt'></i>
                     <span class="links_name">Dashboard</span>
                   </a>
                    <span class="tooltip">Dashboard</span>
             </li>
             <li>
-                <a href="userp">
+                <a href="/st/userp">
                   <i class='bx bx-user' ></i>
                   <span class="links_name">User</span>
                 </a>
                 <span class="tooltip">User</span>
             </li>
             <li>
-                <a href="messages">
+                <a href="/st/messages">
                   <i class='bx bx-chat' ></i>
                   <span class="links_name">Messages</span>
                 </a>
                 <span class="tooltip">Messages</span>
               </li>
               <li>
-                <a href="course">
+                <a href="/st/course">
                   <i class='bx bx-chalkboard'></i>
                   <span class="links_name">Courses</span>
                 </a>
                 <span class="tooltip">Courses</span>
               </li>
               <li>
-                <a href="comp">
+                <a href="/st/comp">
                   <i class='bx bx-trophy' ></i>
                   <span class="links_name">Competition</span>
                 </a>
                 <span class="tooltip">Competition</span>
               </li>
               <li>
-                <a href="books">
+                <a href="/st/books">
                   <i class='bx bx-book'></i>
                   <span class="links_name">Books</span>
                 </a>
                 <span class="tooltip">Books</span>
               </li>
               <li>
-                <a href="certificates">
+                <a href="/st/certificates">
                  <i class='bx bx-id-card'></i>
                   <span class="links_name">Certificate</span>
                 </a>
                 <span class="tooltip">Certificate</span>
               </li>
               <li>
-                <a href="pay">
+                <a href="/st/pay">
                   <i class='bx bxs-backpack'></i>
                   <span class="links_name">Subscription</span>
                 </a>
                 <span class="tooltip">Subscription</span>
               </li>
               <li>
-                <a href="ask">
+                <a href="/st/ask">
                   <i class='bx bx-question-mark'></i>
                   <span class="links_name">Question</span>
                 </a>
                 <span class="tooltip">Question</span>
               </li>
               <li class="profile">
-                <a href="logout">
+                <a href="/st/logout">
                   <div class="profile-details">
           
                     <div class="name_job">
@@ -103,5 +106,7 @@
       {% endblock %}
     </section>  
     <script src="{% static 'js/theme.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
 </body>
 </html>

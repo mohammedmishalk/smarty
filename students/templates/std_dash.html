@@ -1,5 +1,74 @@
 {% extends 'std_theme.html' %}
   {% block content %}
     {% load static %}
-        <div> hallo world</div>
+    <style>
+      h5 {
+        padding-top: 2rem;
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: 600;
+      }
+      h3{
+        margin:.8rem ;
+        box-sizing: border-box;
+        height: max-content;
+        width: max-content;
+        color: #03045e;
+      }
+      .courseDiv{
+        height: 170px;
+        background-image: linear-gradient(to right,#0096c7,#48cae4);
+        margin-top: 2rem;
+        border-radius: 20px;
+        box-shadow:1px 2px 1px 2px #0077b6;
+      }
+      .hedder {
+        padding: 8px;
+        height: 40px;
+        color: #03045e;
+        font-size: 20px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      }
+      .progressbar{
+        height: 8px;
+        display: grid;
+        align-content: center;
+      }
+      .bar-line {
+        height: 6px;
+        background-image:linear-gradient(to right,#023047,#0096c7) ;
+        width: 90%;
+        margin-left: 1rem;
+      }
+      .buttonDiv {
+        height: 60px;
+        display: grid;
+        justify-content: end;
+        padding-right: 2rem;
+        align-content: center;
+      }
+    </style>
+        <div class="container">
+          <h5>My Dashboard</h5>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              {% if dtls %}
+              {% for item in dtls %}
+              <div class="col-12 col-md-11 courseDiv">
+                <div class="hedder">
+                  @{{item}} <hr style="margin-top: 0;">
+                </div>
+                <h3>Python for everybudy</h3>
+                <div class="progressbar">
+                  <div class="bar-line"></div>
+                </div>
+                <div class="buttonDiv">
+                <button style="background-color: #023e8a; height: 40px; width: 100px; border-radius: 20px; color: #fff;">Continue</button>
+                </div>
+              </div>
+              {% endfor %}
+              {% endif %}
+            </div>
+            <div class="col-12 col-md-6">hallo</div>
+          </div>
+        </div>
     {% endblock %}

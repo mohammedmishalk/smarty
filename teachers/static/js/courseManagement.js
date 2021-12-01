@@ -1,13 +1,13 @@
 function choices(ch){
     if (ch==='U'){
-        location.href="U";
+        location.href=1;
     }else if(ch==='E'){
-        location.href="E";
+        location.href="2";
     }
     else if(ch==='P'){
-        location.href="P";
+        location.href=3;
     }else if(ch==='D'){
-        location.href="D";
+        location.href=4;
     }else{
         alert("something wrong.refresh page to load")
     }

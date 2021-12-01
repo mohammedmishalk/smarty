@@ -2,10 +2,10 @@ from django.contrib import admin
 from . import models
 
 class courseAdmin(admin.ModelAdmin):
-    list_display=('course_id','teacher_id','name','week','unit','enroled','time','rating','skils')
+    list_display=('course_id','teacher_id','name','week','enroled','time','rating','skils','created_date')
 
 class regularclassAdmin(admin.ModelAdmin):
-    list_display = ('class_id','teacher_id','name','institution','classDiv','students')
+    list_display = ('class_id','teacher_id','name','institution','classDiv','students','created_date')
 
 class textContentAdmin(admin.ModelAdmin):
     list_display=('id','name','time')

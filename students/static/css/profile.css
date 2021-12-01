@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+
+* {
+	box-sizing: border-box;
+}
+
+h3 {
+	margin: 10px 0;
+}
+
+h6 {
+	margin: 5px 0;
+	text-transform: uppercase;
+}
+
+p {
+	font-size: 14px;
+	line-height: 21px;
+}
+
+.card-container {
+	height: 680px;
+    	float: left;
+    	margin-top: 2.5rem;
+	background-color: #231E39;
+	box-shadow: 0px 10px 20px -10px rgba(0,0,0,0.75);
+	color: #B3B8CD;
+	padding-top: 30px;
+	text-align: center;
+}
+
+.card-container .pro {
+	color: #231E39;
+	background-color: #FEBB0B;
+	border-radius: 3px;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 3px 7px;
+	position: absolute;
+	top: 60px;
+	left: 30px;
+}
+.filebtn{
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+}
+  
+.btnicon {
+	border: 2px solid gray;
+	color: gray;
+	background-color: white;
+	padding: 8px 20px;
+	border-radius: 8px;
+	font-size: 20px;
+	font-weight: bold;
+}
+  
+.filebtn input[type=file] {
+	font-size: 100px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 0;
+}
+
+.card-container .round {
+	margin: 1rem;
+	border: 1px solid #03BFCB;
+	border-radius: 50%;
+	padding: 7px;
+	height: 200px;
+	width: 200px;
+}
+.sub {
+	background-color: #03BFCB;
+	border: 1px solid #03BFCB;
+	border-radius: 3px;
+	color: #231E39;
+	font-family: Montserrat, sans-serif;
+	font-weight: 500;
+	padding: 10px 25px;
+	margin: .7rem;
+}
+.labelfor{
+	display: grid;
+	justify-content: start;
+	margin-left: .5rem;
+}
+
+
+.form-account {
+	padding-left: .4rem;
+	height:40px;
+	width: 90%;
+	margin: .5rem;
+	border-color:#03BFCB ;
+	font-weight: 300;
+	color: #fff;
+	background-color: transparent !important;
+}
+.notes {
+	padding-left: .4rem;
+	margin-top: .5rem;
+	width: 90%;
+	margin: .5rem;
+	border-color:#03BFCB ;
+	font-weight: 300;
+	color: #fff;
+	background-color: transparent !important;
+}
+
+.hidden-pass{
+	height: 0;
+	visibility: hidden;
+}
+button.primary {
+	background-color: #03BFCB;
+	border: 1px solid #03BFCB;
+	border-radius: 3px;
+	color: #231E39;
+	font-family: Montserrat, sans-serif;
+	font-weight: 500;
+	padding: 10px 25px;
+}
+
+button.primary.ghost {
+	background-color: transparent;
+	color: #02899C;
+}
+
+.skills {
+	background-color: #1F1A36;
+	text-align: left;
+	padding: 15px;
+	margin-top: 30px;
+}
+
+.skills ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.skills ul li {
+	border: 1px solid #2D2747;
+	border-radius: 2px;
+	display: inline-block;
+	font-size: 12px;
+	margin: 0 7px 7px 0;
+	padding: 7px;
+}
+.profile-pic {
+	color: transparent;
+	transition: all 0.3s ease;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	margin-top: 5rem !important;
+	margin-bottom: 5rem !important;
+      
+      }
+      
+      .profile-pic input {
+	display: none;
+      }
+      
+      .profile-pic img {
+	position: absolute;
+	object-fit: cover;
+	width: 165px;
+	height: 165px;
+	border-radius: 100px;
+	z-index: 0;
+      }
+      
+      .profile-pic -label {
+	cursor: pointer;
+	height: 165px;
+	width: 165px;
+      }
+      .profile-pic:hover .-label{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(0, 0, 0, 0.8);
+	z-index: 10000;
+	color: #fafafa;
+	transition: background-color 0.2s ease-in-out;
+	border-radius: 100px;
+	margin-bottom: 0;
+      }
+      
+      .profile-pic span {
+	display:inline-flex;
+	padding: 0.2em;
+	height: 2em;
+      }
+      

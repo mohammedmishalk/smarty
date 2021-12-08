@@ -11,12 +11,11 @@ urlpatterns = [
     path("books",views.books,name="books"),
     path("course",views.course,name="course"),
     path("course/<int:course_id>/",views.course_preview,name="course preview"),
-    path("course/<int:course_id>/enroll",views.course_enroll,name="course enroll"),
     path("comp",views.comp,name="competitions"),
     path("certificates",views.cert,name="Certificates"),
     path("pay",views.pay,name="Subscriptions"),
     path("ask",views.ask,name="Questions"),
     path('logout',views.logout,name="logout"),
     path('edit',views.edit,name="edit"),
-    path('search',views.course_search,name="search course"),
+    path('course/search',views.course_search,name="search course"),
 ]

@@ -14,6 +14,30 @@
   input{
     margin-bottom: .5rem;
   }
+  .hideitem{
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+  }
+  h6{
+    margin-top: .6rem;
+  }
+  #week-overview{
+    margin-left: 1rem;
+    margin-top: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .content-btn{
+    background-image: linear-gradient(#48cae4,#caf0f8);
+  }
+  .content-btn:hover{
+    background-image: linear-gradient(#caf0f8,#48cae4);
+  }
+  .content-card {
+    border-radius: 20px;
+    margin: .3rem;
+    padding: 1rem;
+  }
 </style>
 <div class="container" style="height:min-content;min-height: fit-content;">
   {% if messages %}
@@ -25,57 +49,32 @@
   {% endif %}
   <div class="row g-3 align-items-center">
     <h3>Add Countents</h3>
-    <div class="dropdown col-md-4 mbtn">
-        <button
-          class="btn btn-outline-primary dropdown-togglec"
-          type="button"
-          id="dropdownMenuButton1"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          Select Content Type
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li onclick="activity(1)">
-            <a
-              class="dropdown-item"
-              data-bs-toggle="collapse"
-              href="#collapse01"
-              id="link01"
-              role="button"
-              aria-expanded="false"
-              >Text content</a
-            >
-          </li>
-          <li onclick="activity(2)">
-            <a
-              class="dropdown-item"
-              data-bs-toggle="collapse"
-              href="#collapse02"
-              id="link02"
-              role="button"
-              aria-expanded="false"
-              >Image content</a
-            >
-          </li>
-          <li onclick="activity(4)">
-            <a
-              class="dropdown-item"
-              data-bs-toggle="collapse"
-              href="#collapse04"
-              id="link04"
-              role="button"
-              aria-expanded="false"
-              >Video content</a
-            >
-          </li>
-        </ul>
+        <h6>Select Content Type</h6>
+        <div class="row">
+          <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="text" class="btn content-btn"> Text content
+              <input type="radio" name="content" value="1" style="visibility:hidden;" id="text" class="btn content-btn" onclick="changeFourm(1)" />
+            </label>
+            <label for="img" class="btn content-btn">Image content
+              <input type="radio" name="content" value="2" style="visibility:hidden;" id="img" onclick="changeFourm(2)" />
+            </label>
+            <label for="video" class="btn content-btn">Video content
+              <input type="radio" name="content" value="3" id="video" style="visibility:hidden;" onclick="changeFourm(3)" />
+            </label>
+            <label for="ass" class="btn content-btn">Assignment
+              <input type="radio" name="content" value="4" id="ass" style="visibility:hidden;" onclick="changeFourm(4)"/>
+            </label>
+            <label for="quiz" class="btn content-btn">Quiz
+              <input type="radio" name="content" value="5" id="quiz" style="visibility:hidden;" onclick="changeFourm(6)" />
+            </label>
+          </div>
+        </div>
       </div>
+
       
       <div class="row">
-        <div class="collapse" id="collapse01">
-        <form action="add/text" method="POST">
-        {% csrf_token %}
+        <div class="hideitem" id="collapse01">
         <div class="col-md-4">
         <input
           type="text"
@@ -115,11 +114,9 @@
             />
           </div>
          <input type="submit" class="btn btn-primary mbtn" value="Add to week" />
-        </form>
         </div>
-        <div class="collapse" id="collapse02">
-          <form action="add/image" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
+        <div class="hideitem" id="collapse02">
+
         <div class="col-md-4">
         <input
           type="text"
@@ -162,12 +159,9 @@
             />
           </div>
           <input type="submit" class="btn btn-primary mbtn" value="Add to week" />
-          </form>
         </div>
-        <div class="collapse" id="collapse03">3</div>
-        <div class="collapse" id="collapse04">
-          <form action="add/video" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
+        <div class="hideitem" id="collapse03">3</div>
+        <div class="hideitem" id="collapse04">
         <div class="col-md-4">
         <input
           type="text"
@@ -194,5 +188,42 @@
       </div>
     </form>
   </div>
+<div>
+<h5 id="week-overview">Week overview</h5>
+{% if content %}
+<div class="container content-div">
+  {% for item in content %}
+  <div class="card content-card ">
+  <div class="row">
+    <div class="col-1">{{forloop.counter}}.</div>
+    <div class="col-10">{{item.name}}</div>
+    <div class="col-1 ">{{item.time}} minuts</div>
+  </div>
 </div>
+
+
+  {% endfor %}
+
+{% endif %}
+
+<script>
+    text_form = document.getElementById("collapse01");
+    image_form =  document.getElementById("collapse02");
+    video_form = document.getElementById("collapse04");
+  function changeFourm(n){
+    if (n==1){
+      image_form.classList.add("hideitem")
+      video_form.classList.add("hideitem")
+      text_form.classList.remove("hideitem")
+    }else if (n==2) {
+      text_form.classList.add("hideitem")
+      video_form.classList.add("hideitem")
+      image_form.classList.remove("hideitem")
+    }else if(n==3){
+      image_form.classList.add("hideitem")
+      text_form.classList.add("hideitem")
+      video_form.classList.remove("hideitem")
+    }
+  }
+</script>
 {% endblock %}

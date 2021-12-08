@@ -1,6 +1,157 @@
 {% extends 'theme.html' %}
-
+{% load static %}
 {% block content %}
-  <h1> this is home page {{user.first_name}}</h1>
 
-{%endblock%}
+        <link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <body>
+
+        <main class="l-main">
+            <!--===== HOME =====-->
+            <section class="home bd-grid" id="home">
+                <div class="home__data">
+                    <h1 class="home__title">Lerners,<br>This is <span class="home__title-color">Smarty</span><br> Next Level <br>Learning Platform </h1>
+
+                    <a href="#" class="button">Join Now</a>
+                </div>
+
+                <div class="home__social">
+                    <a href="" class="home__social-icon"><i class='bx bxl-github' ></i></a>
+                    <a href="" class="home__social-icon"><i class='bx bxl-linkedin'></i></a>
+                    <a href="" class="home__social-icon"><i class='bx bxl-instagram-alt'></i></a>
+                    <a href="" class="home__social-icon"><i class='bx bxl-youtube' ></i></a>
+                </div>
+
+                <div class="home__img">    
+                    <img src="{% static 'images/perfil.jpg' %}" alt="" style="border-radius:  600px 380px 500px 240px;">
+                </div>
+            </section>
+
+            <!--===== WHY SMARTY =====-->
+        <section class="work section" id="work" style="display: flex;justify-content: center;">
+            <div class="col-12 col-md-6 skills__container">
+              <h2 class="section-title">WHY SMARTY</h2>
+              <div class="skills__data">
+                <div class="skills__names">
+                  <i class='bx bxs-graduation skills__icon' ></i></i>
+                    <span class="skills__name">10000 certification courses </span>
+                </div>
+            </div>
+            <div class="skills__data">
+                <div class="skills__names">
+                  <i class='bx bxs-trophy skills__icon' ></i></i>
+                    <span class="skills__name">Daily Compatitions</span>
+                </div>
+            </div> 
+            <div class="skills__data">
+                <div class="skills__names">
+                  <i class='bx bxs-school skills__icon' ></i></i>
+                    <span class="skills__name">Regualer class</span>
+                </div>
+            </div>
+            <div class="skills__data">
+                <div class="skills__names">
+                  <i class='bx bxs-id-card skills__icon' ></i></i>
+                    <span class="skills__name">Automatic Resume builder</span>
+                </div>
+            </div>
+            <div class="skills__data">
+                <div class="skills__names">
+                  <i class='bx bxs-message-square-dots skills__icon' ></i></i>
+                    <span class="skills__name">Chat with Lerners</span>
+                </div>
+            </div>
+            </div>
+        </section>
+
+            <!--===== WORK =====-->
+            <section class="work section" id="work">
+                <h2 class="section-title">Top Courses</h2>
+                {% include 'top_course.html' %}
+            </section>
+
+            <!--===== SKILLS =====-->
+            <section class="skills section" id="skills">
+                <h2 class="section-title">Skils can Gain</h2>
+
+                <div class="skills__container bd-grid">          
+                    <div>
+                        <h2 class="skills__subtitle">Profesional Skills</h2>
+                        <p class="skills__text">Enrol to Certification courses, earn new skills in every Day <br>
+                        skills Gives everything even GF 💖</p>
+                        <div class="skills__data">
+                            <div class="skills__names">
+                              <i class='bx bx-code-alt skills__icon' ></i>
+                                <span class="skills__name">Programming</span>
+                            </div>
+                            <div class="skills__bar skills">
+
+                            </div>
+                        </div>
+                        <div class="skills__data">
+                            <div class="skills__names">
+                              <i class='bx bxs-calculator skills__icon' ></i></i>
+                                <span class="skills__name">Mathematics</span>
+                            </div>
+                            <div class="skills__bar skills">
+                                
+                           </div>                            
+                        </div>
+                        <div class="skills__data">
+                            <div class="skills__names">
+                                <i class='bx bx-stats skills__icon' ></i>
+                                <span class="skills__name">Data analysis</span>
+                            </div>
+                            <div class="skills__bar skills">
+                                
+                            </div>
+                        </div>
+                        <div class="skills__data">
+                            <div class="skills__names">
+                                <i class='bx bxs-paint skills__icon'></i>
+                                <span class="skills__name">UX/UI</span>
+                            </div>
+                            <div class="skills__bar skills">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>              
+                        <img src="{% static 'images/work3.jpg' %} " alt="" class="skills__img">
+                    </div>
+                </div>
+            </section>
+
+
+            <!--===== CONTACT =====-->
+            <section class="contact section" id="contact">
+                <h2 class="section-title">Contact</h2>
+
+                <div class="contact__container bd-grid">
+                    <form action="" class="contact__form">
+                        <input type="text" placeholder="Name" class="contact__input">
+                        <input type="mail" placeholder="Email" class="contact__input">
+                        <textarea name="" id="" cols="0" rows="10" class="contact__input" placeholder="Message"></textarea>
+                        <input type="button" value="Connect" class="contact__button button">
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <!--===== FOOTER =====-->
+        <footer class="footer" style="width: 100%;">
+            <p class="footer__title">Smarty</p>
+            <div class="footer__social">
+                <a href="#" class="footer__icon"><i class='bx bxl-facebook' ></i></a>
+                <a href="#" class="footer__icon"><i class='bx bxl-instagram' ></i></a>
+                <a href="#" class="footer__icon"><i class='bx bxl-twitter' ></i></a>
+            </div>
+            <p>&#169; 2021 copyright all right reserved</p>
+        </footer>
+
+    </body>
+</html>
+
+{% endblock %}

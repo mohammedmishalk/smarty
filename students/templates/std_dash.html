@@ -36,7 +36,6 @@
       .bar-line {
         height: 6px;
         background-image:linear-gradient(to right,#023047,#0096c7) ;
-        width: 90%;
         margin-left: 1rem;
       }
       .buttonDiv {
@@ -51,15 +50,15 @@
           <h5>My Dashboard</h5>
           <div class="row">
             <div class="col-12 col-md-6">
-              {% if dtls %}
-              {% for item in dtls %}
+              {% if data %}
+              {% for item in data %}
               <div class="col-12 col-md-11 courseDiv">
                 <div class="hedder">
-                  @{{item}} <hr style="margin-top: 0;">
+                  @{{item.thr_id}} <hr style="margin-top: 0;">
                 </div>
-                <h3>Python for everybudy</h3>
+                <h3>{{item.cour_name}}</h3>
                 <div class="progressbar">
-                  <div class="bar-line"></div>
+                  <div class="bar-line" style="width: {{item.completed}}%;"></div>
                 </div>
                 <div class="buttonDiv">
                 <button style="background-color: #023e8a; height: 40px; width: 100px; border-radius: 20px; color: #fff;">Continue</button>

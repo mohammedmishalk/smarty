@@ -8,7 +8,9 @@
     <div class="container text-center wow zoomIn">
       <span class="subhead">Learn And Earn without a Limit</span>
       <h1 class="display-4">{{data.name}}</h1>
-      <a href="enroll" class="btn btn-primary">Enroll Now</a>
+      <form action="" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Enroll now" class="btn btn-primary"/>
     </div>
   </div>
 </div>

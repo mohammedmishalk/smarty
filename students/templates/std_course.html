@@ -28,7 +28,7 @@
       <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
           <a class="navbar-brand"><h2>Course Dashboard</h2></a>
-          <form class="d-flex" action="search" method="get">
+          <form class="d-flex" action="/st/course/search" method="get">
             <div class="col col-md-2">
               <select class="form-select" name="type" id="inputGroupSelect01">
                 <option value="1">ID</option>
@@ -71,6 +71,8 @@
       {% endif %}
     
     </div>
+    {% block course_content %}{% endblock course_content %}
+
   <script>
     function Course_view (id){
       window.location ="/st/course/"+id;

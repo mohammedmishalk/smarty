@@ -132,7 +132,7 @@ def add_course(request):
         cs = course(
             course_id=id,
             teacher_id=u,
-            name=request.POST['cname'].lower(),
+            name=request.POST['cname'].capitalize(),
             time=td,
             discriptions=request.POST['editor1'],
             skils=skils,
@@ -179,10 +179,7 @@ def course_method(request, course_id, method):
     user = request.user.username
     if method == 1 :
         if request.method == 'POST':
-            if weeks.objects.filter(course_id=course_id).exists():
-                data = weeks.objects.get(pk=course_id)
-            else:
-                w = weeks.objects.get_or_create(pk=course_id)
+            w = weeks.objects.get_or_create(pk=course_id)
             data = weeks.objects.get(pk=course_id)
             id = weekIdGenerater(course_id)
             weekList = data.week
@@ -197,6 +194,10 @@ def course_method(request, course_id, method):
             data = weeks.objects.get(pk=course_id)
             return render(request, "add_content.html", {"data":data})
         else:
+            try:
+                data = weeks.objects.get(pk=course_id)
+            except:
+                data = weeks.objects.get_or_create(pk=course_id)
             data = weeks.objects.get(pk=course_id)
             return render(request, "add_content.html",{"data":data})
     elif method == 3:
@@ -232,71 +233,86 @@ def course_method(request, course_id, method):
             return render(request, "course_edit.html", ({"data": data, "faq": data.Questions, }))
 
 
-def add_content(request, ty, course_id):
-    if request.method == 'POST':
-        user = request.user.username
-        if weeks.objects.filter(course_id=course_id).exists():
-            data = weeks.objects.get(pk=course_id)
-        else:
-            w = weeks.objects.get_or_create(pk=course_id)
-        data = weeks.objects.get(pk=course_id)
-        ac = len(data.week)-1
-        if ac < 0:
-            messages.error(request, 'Add a Week before adding Content')
-        else:
-            active_week = data.week[ac]
-            order = data.content[active_week]["order"]
-            if ty == 'text':
-                id = contentIdGenerater(active_week, order)
-                id = id+'T'
-                course_data = text_content(
+def week_content_view(request,course_id,week):
+    if request.method =='POST':
+        order=contentOrder.objects.get_or_create(pk=week)
+        order=contentOrder.objects.get(pk=week)
+        content_selection = request.POST["content"]
+        if content_selection == "1":
+            id = contentIdGenerater(week,order.order)
+            id = id+'T'
+            order.order.append(id)
+            course_data = text_content(
                     id=id,
+                    course_id=course_id,
                     name=request.POST["title"],
                     content=request.POST["editor1"],
                     reference=request.POST["editor2"],
                     time=request.POST["time"])
-                course_data.save()
-                data.content[active_week]["order"].append(id)
-                data.save()
-            elif ty == 'image':
-                id = contentIdGenerater(active_week, order)
-                id = id+"I"
-                course_data = img_content(
+            course_data.save()
+            order.save()
+        elif content_selection == "2":
+            id = contentIdGenerater(week,order.order)
+            id = id+'I'
+            order.order.append(id)
+            course_data = img_content(
                     id=id,
+                    course_id=course_id,
                     name=request.POST["title1"],
                     text=request.POST["editor3"],
                     Reference=request.POST["editor4"],
                     time=request.POST["time1"],
                     img=request.FILES["image"])
-                course_data.save()
-                data.content[active_week]["order"].append(id)
-                data.save()
-            elif ty == 'video':
-                id = contentIdGenerater(active_week, order)
-                id = id+"V"
-                course_data = Videos(
+            course_data.save()
+            order.save()
+        elif content_selection=="3":
+            id = contentIdGenerater(week,order.order)
+            id = id+'V'
+            order.order.append(id)
+            course_data = Videos(
                     id=id,
+                    course_id=course_id,
                     name=request.POST["title3"],
                     time=request.POST["time2"],
                     video=request.FILES['video'])
-                course_data.save()
-                data.content[active_week]["order"].append(id)
-                data.save()
-    return redirect("/te/mycourse/58786/U")
+            course_data.save()
+            order.save()
+        elif content_selection=="4":
+            pass
+        else:
+            pass
+        return redirect(f"/te/mycourse/{course_id}/{week}")
+    else:
+        data = weeks.objects.get(pk=course_id)
+        content_order = contentOrder.objects.get_or_create(pk=week)
+        content_order = contentOrder.objects.get(pk=week)
+        content=[]
+        for items in content_order.order:
+            if items.endswith("T"):
+                temp = text_content.objects.get_or_create(pk=items)
+                temp = text_content.objects.get(pk=items)
+                content.append(temp)
+            elif items.endswith("I"):
+                temp = img_content.objects.get_or_create(pk=items)
+                temp = img_content.objects.get(pk=items)
+                content.append(temp)
+            elif items.endswith("V"):
+                temp = Videos.objects.get_or_create(pk=items)
+                temp = Videos.objects.get(pk=items)
+                content.append(temp)
+        context = {"data":data,"content":content}
 
-def week_content_view(request,course_id,week):
-    data = weeks.objects.get(pk=course_id)
-    context = {"data":data}
-    return render(request, "week_item.html",context)
+        return render(request, "week_item.html",context)
 
 
 def contentIdGenerater(n, c):
     while True:
         randum_id = random.randint(0, 50)
-        if randum_id in c:
+        temp = n+str(randum_id)
+        if temp in c:
             continue
         else:
-            return n+str(randum_id)
+            return temp
 
 
 def id_generator(n):

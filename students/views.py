@@ -4,8 +4,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from accounts.models import userprofile, contact, Quality
 from course import models
-from .models import StudentOverview
-import datetime
+from .models import StdOverview, skilsNcourse
 
 # Create your views here.
 def dashboard(request):
@@ -18,15 +17,9 @@ def dashboard(request):
         if ud.ac_type == 0:
             return redirect(f'/te/dash')
         else:
-            try:
-               data = StudentOverview.objects.get(pk=user) 
-            except:
-                data = StudentOverview.objects.get_or_create(pk=user) 
-            data = StudentOverview.objects.get(pk=user)
-            dtls =[]
-            for item in data.course_dtls:
-                dtls.append(data.course_dtls[item]["teacher"])
-    return render(request,'std_dash.html',{"dtls":dtls})
+            data = StdOverview.objects.filter(std_id=user) 
+            context = {"data":data}
+    return render(request,'std_dash.html',context)
 
 
 def userp(request):
@@ -166,42 +159,33 @@ def course_search(request):
     return HttpResponse(keyword)
 
 def course_preview(request,course_id):
-    data = models.course.objects.get(pk=course_id)
-    return render(
-        request,
-        "std_course_view.html",
-        ({"data": data,
-        "skils": data.skils,
-        "faq": data.Questions, }))
-
-def course_enroll(request,course_id):
-    user = request.user.username 
-    if User.is_authenticated:
-        try:
-            overview = StudentOverview.objects.get(pk=user)
-        except:
-            overview = StudentOverview.objects.get_or_create(pk=user)
-        overview = StudentOverview.objects.get(pk=user)
-        if course_id in overview.course_dtls:
-            messages.error(request,"Alredy enroled")
+    if request.method =="POST":
+        user = request.user.username 
+        if User.is_authenticated:
+            try:
+                overview = skilsNcourse.objects.get(pk=user)
+            except:
+                overview = skilsNcourse.objects.get_or_create(pk=user)
+            overview = skilsNcourse.objects.get(pk=user)
+            if course_id in overview.courses:
+                messages.error(request,"Alredy enroled")
+                return redirect("/st/course")
+            else:
+                overview.courses.append(course_id)
+                course_dtls = models.course.objects.get(pk=course_id)
+                course_dtls.enroled +=1;
+                course_dtls.save()
+                data = models.course.objects.get(pk=course_id)
+                overview.save()
+                StdOverview(id=f"{user} {course_id}",std_id=user,cour_name=data.name,thr_id=data.teacher_id).save()
+                return redirect("/st/dash")
         else:
-            date_obj = datetime.datetime.now()
-            date_enroled=f"{date_obj.day}:{date_obj.month}:{date_obj.year}"
-            data = models.course.objects.get(pk=course_id)
-            teacher = data.teacher_id
-            new_data = {
-                course_id:{
-                    "teacher": teacher,
-                    "completed" : "0%",
-                    "progress" : {},
-                    "doe" :date_enroled,
-                    "doc" :""
-                }
-            }
-            overview.course_dtls.update(new_data)
-            overview.std_skils=[]
-            overview.save()
-
-            return redirect("/st/dash")
+            return redirect("/")
     else:
-        return redirect("/")
+        data = models.course.objects.get(pk=course_id)
+        return render(
+            request,
+            "std_course_view.html",
+            ({"data": data,
+            "skils": data.skils,
+            "faq": data.Questions, }))

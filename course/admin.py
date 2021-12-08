@@ -18,10 +18,12 @@ admin.site.register(models.course,courseAdmin)
 admin.site.register(models.regularclass,regularclassAdmin)
 
 admin.site.register(models.weeks)
+admin.site.register(models.contentOrder)
 
 
 admin.site.register(models.text_content,textContentAdmin)
 admin.site.register(models.img_content)
+admin.site.register(models.Videos)
 
 
 

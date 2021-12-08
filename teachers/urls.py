@@ -17,7 +17,6 @@ urlpatterns = [
     path("mycourse/<int:course_id>/<int:method>",views.course_method,name="course method"),
     path("mycourse/<int:course_id>/<str:week>",views.week_content_view,name="week content"),
     path('editc',views.editc,name="edit cv"),
-    path('mycourse/<int:course_id>/add/<str:ty>',views.add_content,name="add course content"),
     path('edits',views.edits,name="edit contact"),
     path('view/<int:course_id>',views.viewcourse,name="view content"),
 

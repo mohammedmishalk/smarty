@@ -1,7 +1,8 @@
 from django.contrib import admin
-from .models import StudentOverview
+from .models import StdOverview,skilsNcourse
 
 
-admin.site.register(StudentOverview)
+admin.site.register(StdOverview)
+admin.site.register(skilsNcourse)
 
 

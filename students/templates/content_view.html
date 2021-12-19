@@ -1,0 +1,83 @@
+{% extends 'std_theme.html' %}
+  {% block content %}
+    {% load static %}
+<style>
+  .week_container {
+    padding-top: 2rem;
+    max-height: 100vh;
+    overflow:scroll;
+  }
+  .week_overview {
+    padding-top: 1rem;
+    height: 90vh;
+    box-shadow:2px 2px 2px 2px#c9c9c9;
+    display: grid;
+    justify-content: center;
+    align-content: flex-start;
+    position: sticky;
+  }
+  a{
+    height: min-content;
+    width: min-content;
+    margin-bottom: 2px;
+  }
+  .content {
+    height: max-content;
+    margin-left: 2rem;
+    overflow:scroll;
+    scrollbar-width: none;
+  }
+  .content::-webkit-scrollbar{
+    display:none;
+  }
+  .messageDiv{
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    margin-top: .6rem;
+  }
+  .message{
+        background-color: rgb(132, 200, 212);
+        color: #fff;
+        padding: .5rem;
+        width:max-content;
+        border-radius: 5px;
+        box-shadow: 1px 1px #888888;
+      }
+</style>
+<div class="week_container">
+  <div class="row">
+  <div class="content_container col-10 col-md-9">
+    <div class="content">
+      {% if messages %}
+      {% for message in messages%}
+      <div class="messageDiv">
+        <div class="message">{{message}}</div>
+      </div>
+      {% endfor%}
+      {% endif %}
+      {% block content_view %}
+
+      {% endblock content_view %}
+      <div>
+            <button class="btn btn-danger" onclick="option(0)">Skip</button>
+            <button class="btn btn-primary" onclick="option(1)">Finish</button> 
+      </div>
+    </div>
+  </div>
+  <div class="col-10 col-md-3">
+    <div class="week_overview ">
+      <div class="container-fluid"><h1>{{week.overview|safe}}</h1></div>
+      {% for item in order.order %}
+      <a href="{{item}}"><button class="btn btn-outline-secondary" style="width:250px;margin-left: 2.5rem;">contents {{forloop.counter}}</button></a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+</div>
+<script>
+  function option(n){
+    window.location=  window.location.href+'/'+n;
+  }
+</script>
+    {% endblock %}

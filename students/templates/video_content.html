@@ -1,0 +1,7 @@
+{% extends 'content_view.html' %}
+  {% block content_view %}
+    {% load static %}
+    <div><h1>{{content.name}}</h1></div>
+          <video src="{{content.video.url}}" controls></video>
+          <div> {{content.time}} minuts to complete</div>
+    {% endblock %}

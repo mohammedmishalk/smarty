@@ -1,0 +1,7 @@
+{% extends 'content_view.html' %}
+  {% block content_view %}
+    {% load static %}
+    <div><h1>{{content.name}}</h1></div>
+          <div>{{content.content|safe}}</div>
+          <div> {{content.time}} minuts to complete</div>
+    {% endblock %}

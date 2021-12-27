@@ -1,0 +1,114 @@
+{% extends 'course_management.html' %}
+{% load static %}
+{% block management %}
+<style>
+          .form-div {
+                    margin-top:1rem;
+          }
+</style>
+<div class="container">
+          <h3>add Question</h3>
+          <form id="quiz-form">
+                    {% csrf_token %}
+          <div class="col-md-6 form-div">
+            <textarea
+            type="text" 
+            name="question" 
+            id="qus" 
+            rows="5"
+            class="form-control"
+            placeholder="Question..." 
+            required></textarea>
+          </div>
+          <div class="col-md-3 form-div">
+            <label for="a">Option A :</label>
+            <input type="text" name="opta" id="a" class="form-control" required>
+          </div>
+          <div class="col-md-3 form-div">
+            <label for="b">Option B :</label>
+            <input type="text" name="optb" id="b" class="form-control" required>
+          </div>
+          <div class="col-md-3 form-div">
+            <label for="c">Option C :</label>
+            <input type="text" name="optc" id="c" class="form-control" required>
+          </div>
+          <div class="col-md-3 form-div">
+            <label for="d">Option D :</label>
+            <input type="text" name="optd" id="d" class="form-control" required>
+          </div>
+          <div class="col-md-4 form-div">
+                    <label for="d"> Answer : </label><br>
+                    <div class="btn btn-outline-info" id="a-btn" onclick="ans_select('a')">Option A</div>
+                    <div class="btn btn-outline-info" id="b-btn" onclick="ans_select('b')">Option B</div>
+                    <div class="btn btn-outline-info" id="c-btn" onclick="ans_select('c')">Option C</div>
+                    <div class="btn btn-outline-info" id="d-btn" onclick="ans_select('d')">Option D</div>
+                    <input type="text" name="ans" id="ans" class="form-control" hidden required >
+          </div>
+          <input type="Submit" class="btn btn-info form-div" name="submit" id="submit" value="add">
+          </form>   
+</div>
+<script>
+          ans_input = document.getElementById("ans");
+          btn_a = document.getElementById("a-btn")
+          btn_b = document.getElementById("b-btn")
+          btn_c = document.getElementById("c-btn")
+          btn_d = document.getElementById("d-btn")
+          function ans_select(n){
+                    if (n=='a'){
+                              ans_input.value='a';
+                              btn_a.classList.remove("btn-outline-info")
+                              btn_a.classList.add("btn-info")
+                              btn_b.classList.remove("btn-info")
+                              btn_c.classList.remove("btn-info")
+                              btn_d.classList.remove("btn-info")
+                    }else if (n=='b') {
+                              ans_input.value='b';
+                              btn_b.classList.remove("btn-outline-info")
+                              btn_b.classList.add("btn-info")
+                              btn_a.classList.remove("btn-info")
+                              btn_c.classList.remove("btn-info")
+                              btn_d.classList.remove("btn-info")
+                    }else if(n=='c') {
+                              ans_input.value='c';
+                              btn_c.classList.remove("btn-outline-info")
+                              btn_c.classList.add("btn-info")
+                              btn_b.classList.remove("btn-info")
+                              btn_a.classList.remove("btn-info")
+                              btn_d.classList.remove("btn-info")
+                    }else {
+                              ans_input.value='d';
+                              btn_d.classList.remove("btn-outline-info")
+                              btn_d.classList.add("btn-info")
+                              btn_b.classList.remove("btn-info")
+                              btn_c.classList.remove("btn-info")
+                              btn_a.classList.remove("btn-info")
+                    }
+          }
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" 
+          integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
+            crossorigin="anonymous"></script>
+            <script>
+                      count = 1;
+                    $(document).on('submit','#quiz-form',function(e){
+                        e.preventDefault();
+                        $.ajax({
+                            type:'POST',
+                            url:'/te/update/{{data.id}}',
+                            data:
+                            {
+                                qus:$("#qus").val(),
+                                opta:$("#a").val(),
+                                optb:$("#b").val(),
+                                optc:$("#c").val(),
+                                optd:$("#d").val(),
+                                ans:$("#ans").val(),
+                                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+                            },
+                            success:function(){
+                                      alert("Qustion added")
+                                    }
+                            })
+                        });
+                    </script>
+{% endblock management %}

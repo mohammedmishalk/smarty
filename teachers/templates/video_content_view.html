@@ -1,0 +1,8 @@
+{% extends 'course_management.html' %}
+{% load static %}
+{% block management %}
+<div class="container">
+<div><h1>{{data.name}}</h1></div>
+<video src="{{data.video.url}}" style="width: 60%; height: 50%;" controls></video>
+<div> {{data.time}} minuts to complete</div></div>
+{% endblock management %}

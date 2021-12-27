@@ -16,6 +16,7 @@ urlpatterns = [
     path("mycourse/<int:course_id>/",views.course_management,name="course view"),
     path("mycourse/<int:course_id>/<int:method>",views.course_method,name="course method"),
     path("mycourse/<int:course_id>/<str:week>",views.week_content_view,name="week content"),
+    path("update/<str:id>",views.quiz_update,name="week quiz update"),
     path('editc',views.editc,name="edit cv"),
     path('edits',views.edits,name="edit contact"),
     path('view/<int:course_id>',views.viewcourse,name="view content"),

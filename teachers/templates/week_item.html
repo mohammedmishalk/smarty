@@ -5,7 +5,9 @@
     margin: 0.5rem;
     margin-top: 0.5rem;
   }
-
+  div{
+    margin-top: .5rem;
+  }
   .colapslink {
     width: fit-content !important;
     margin: 0;
@@ -66,7 +68,7 @@
               <input type="radio" name="content" value="4" id="ass" style="visibility:hidden;" onclick="changeFourm(4)"/>
             </label>
             <label for="quiz" class="btn content-btn">Quiz
-              <input type="radio" name="content" value="5" id="quiz" style="visibility:hidden;" onclick="changeFourm(6)" />
+              <input type="radio" name="content" value="5" id="quiz" style="visibility:hidden;" onclick="changeFourm(5)" />
             </label>
           </div>
         </div>
@@ -160,7 +162,19 @@
           </div>
           <input type="submit" class="btn btn-primary mbtn" value="Add to week" />
         </div>
-        <div class="hideitem" id="collapse03">3</div>
+        <div class="hideitem" id="collapse03">
+          <div class="col-md-4">
+            <label for="quiz">name of test</label>
+            <input type="text" class="form-control"  placeholder="short name" name="quiz" id="quiz" />
+            <label for="tp">totel points</label>
+            <input type="text" class="form-control" name="tp" id="tp" placeholder="the maximum point"/>
+            <label for="ts">points to pass</label>
+            <input type="text" class="form-control" name="ts" id="tp" placeholder="the minimum point to pass"/>
+            <label for="quiz_time">Time to finish</label>
+            <input type="text" class="form-control" name="quiz_time" id="time03" placeholder="in minuts"/>
+          </div>
+          <input type="submit" class="btn btn-primary mbtn" value="Add to week" />
+        </div>
         <div class="hideitem" id="collapse04">
         <div class="col-md-4">
         <input
@@ -193,13 +207,14 @@
 {% if content %}
 <div class="container content-div">
   {% for item in content %}
+  <a href="?id={{item.id}}" style="text-decoration: none;color: #000;">
   <div class="card content-card ">
   <div class="row">
     <div class="col-1">{{forloop.counter}}.</div>
     <div class="col-10">{{item.name}}</div>
     <div class="col-1 ">{{item.time}} minuts</div>
   </div>
-</div>
+</div></a>
 
 
   {% endfor %}
@@ -210,20 +225,31 @@
     text_form = document.getElementById("collapse01");
     image_form =  document.getElementById("collapse02");
     video_form = document.getElementById("collapse04");
+    quiz_form = document.getElementById("collapse03");
   function changeFourm(n){
     if (n==1){
       image_form.classList.add("hideitem")
       video_form.classList.add("hideitem")
+      quiz_form.classList.add("hideitem")
       text_form.classList.remove("hideitem")
+
     }else if (n==2) {
       text_form.classList.add("hideitem")
       video_form.classList.add("hideitem")
+      quiz_form.classList.add("hideitem")
       image_form.classList.remove("hideitem")
     }else if(n==3){
       image_form.classList.add("hideitem")
       text_form.classList.add("hideitem")
+      quiz_form.classList.add("hideitem")
       video_form.classList.remove("hideitem")
+    }else if(n==5){
+      image_form.classList.add("hideitem")
+      text_form.classList.add("hideitem")
+      quiz_form.classList.remove("hideitem")
+      video_form.classList.add("hideitem")
     }
+
   }
 </script>
 {% endblock %}

@@ -1,5 +1,6 @@
 from typing import Dict, List
 from django.db import models
+from django.db.models.fields.json import JSONField
 
 class course(models.Model):
     course_id=models.CharField(max_length=255,null=False,unique=True,primary_key=True)
@@ -59,3 +60,12 @@ class Videos(models.Model):
     name = models.CharField(max_length=30,null=False)
     video = models.FileField(upload_to='videos/')
     time = models.IntegerField()
+
+class Quiz(models.Model):
+    id = models.CharField(max_length=100,unique=True, null=False, primary_key= True)
+    name = models.CharField(max_length=30,null=False)
+    questions = JSONField(default =list)
+    totel_point = models.IntegerField()
+    to_pass = models.IntegerField()
+    time = models.IntegerField()
+

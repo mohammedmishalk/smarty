@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import auth, User
 from accounts.models import userprofile, contact, Quality
-from course.models import Videos, course, img_content, weeks, text_content, regularclass, contentOrder
+from course.models import Quiz, Videos, course, img_content, weeks, text_content, regularclass, contentOrder
 import random
 
 def dashboard(request):
@@ -280,30 +280,73 @@ def week_content_view(request,course_id,week):
         elif content_selection=="4":
             pass
         else:
-            pass
+            id = contentIdGenerater(week,order.order)
+            id = id+"Q"
+            order.order.append(id)
+            course_data = Quiz(
+                    id=id,
+                    name= request.POST["quiz"],
+                    totel_point = request.POST["tp"],
+                    to_pass = request.POST["ts"],
+                    time = request.POST["quiz_time"]
+                ).save()
+            order.save()
         return redirect(f"/te/mycourse/{course_id}/{week}")
     else:
-        data = weeks.objects.get(pk=course_id)
-        content_order = contentOrder.objects.get_or_create(pk=week)
-        content_order = contentOrder.objects.get(pk=week)
-        content=[]
-        for items in content_order.order:
-            if items.endswith("T"):
-                temp = text_content.objects.get_or_create(pk=items)
-                temp = text_content.objects.get(pk=items)
-                content.append(temp)
-            elif items.endswith("I"):
-                temp = img_content.objects.get_or_create(pk=items)
-                temp = img_content.objects.get(pk=items)
-                content.append(temp)
-            elif items.endswith("V"):
-                temp = Videos.objects.get_or_create(pk=items)
-                temp = Videos.objects.get(pk=items)
-                content.append(temp)
-        context = {"data":data,"content":content}
+        q = request.GET.get('id') if request.GET.get('id') != None else ""
+        if q =="":
+            data = weeks.objects.get(pk=course_id)
+            content_order = contentOrder.objects.get_or_create(pk=week)
+            content_order = contentOrder.objects.get(pk=week)
+            content=[]
+            for items in content_order.order:
+                if items.endswith("T"):
+                    temp = text_content.objects.get_or_create(pk=items)
+                    temp = text_content.objects.get(pk=items)
+                    content.append(temp)
+                elif items.endswith("I"):
+                    temp = img_content.objects.get_or_create(pk=items)
+                    temp = img_content.objects.get(pk=items)
+                    content.append(temp)
+                elif items.endswith("V"):
+                    temp = Videos.objects.get_or_create(pk=items)
+                    temp = Videos.objects.get(pk=items)
+                    content.append(temp)
+                elif items.endswith("Q"):
+                    temp = Quiz.objects.get(pk=items)
+                    content.append(temp)
+            context = {"data":data,"content":content}
 
-        return render(request, "week_item.html",context)
+            return render(request, "week_item.html",context)
+        else :
+            if q.endswith("Q"):
+                data = Quiz.objects.get(pk=q) 
+                return render(request,"Quiz_update_form.html",{"data":data})
+            elif q.endswith("T"):
+                data = text_content.objects.get(pk=q) 
+                return render(request,"text_content_view.html",{"data":data})
+            elif q.endswith("I"):
+                data = img_content.objects.get(pk=q) 
+                return render(request,"image_content_view.html",{"data":data})
+            elif q.endswith("V"):
+                data = Videos.objects.get(pk=q) 
+                return render(request,"video_content_view.html",{"data":data})
 
+
+def quiz_update(request,id):
+    if request.method =='POST':
+        question = Quiz.objects.get(pk=id)
+        data={
+            "qus": request.POST.get("qus"),
+            "opta": request.POST.get("opta"),
+            "optb": request.POST.get("optb"),
+            "optc": request.POST.get("optc"),
+            "optd": request.POST.get("optd"),
+            "ans" : request.POST.get("ans")
+        }
+        question.questions.append(data)
+        question.save()
+    return HttpResponse("added")
 
 def contentIdGenerater(n, c):
     while True:
@@ -313,7 +356,6 @@ def contentIdGenerater(n, c):
             continue
         else:
             return temp
-
 
 def id_generator(n):
     while True:

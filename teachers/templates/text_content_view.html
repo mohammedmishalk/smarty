@@ -1,0 +1,9 @@
+{% extends 'course_management.html' %}
+{% load static %}
+{% block management %}
+<div class="container">
+<div><h1>{{data.name}}</h1></div>
+<div>{{data.content|safe}}</div>
+<div> {{data.time}} minuts to complete</div>
+</div>
+{% endblock management %}

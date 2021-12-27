@@ -1,0 +1,15 @@
+{% extends 'course_management.html' %}
+{% load static %}
+{% block management %}
+<style>
+          .image-div {
+            width: 50%;
+          }
+</style>
+          <div>
+                  <h1>{{data.name}}</h1>
+          </div>
+          <div><img src="{{data.img.url}}" class="image-div" alt=""></div>
+          <div>{{data.text|safe}}</div>
+          <div>{{data.time}} to complete</div>
+{% endblock management %}

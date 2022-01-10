@@ -1,5 +1,6 @@
 from typing import Dict, List
 from django.db import models
+from django.db.models.fields.json import JSONField
 
 # Create your models here.
 
@@ -37,3 +38,14 @@ class completed(models.Model):
     course_id = models.CharField(max_length=255)
     completed_weeks = models.JSONField(default = list)
     completed_content = models.JSONField(default = list)
+    test_score = models.JSONField(default = list)
+    assignment = models.JSONField(default = list)
+    completed = models.BooleanField(default=False)
+
+class studentScore(models.Model):
+    stud_id = models.CharField(max_length=255)
+    course_id = models.CharField(max_length=255)
+    exam = JSONField(default =list)
+    project = models.FileField(upload_to='project/',null=True)
+    assignment = models.JSONField(default =list) 
+

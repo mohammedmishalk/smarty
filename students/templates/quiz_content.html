@@ -1,0 +1,67 @@
+{% extends 'content_view.html' %}
+  {% block content_view %}
+    {% load static %}
+<style>
+      .quiz-card-container {
+            display: grid;
+            justify-content: center;
+      }
+      .Quiz-card{
+            height: min-content;
+            width: 500px;
+            margin-bottom: 2.5rem;
+            background-color: #231E39;
+            box-shadow: 0px 10px 20px -10px rgba(0,0,0,0.75);
+            color: #B3B8CD;
+            padding: 30px;
+            text-align: start;
+      }
+      .options {
+            margin-bottom: 1rem;
+      }
+      input[type="radio"]{
+            opacity: 0;
+            position: fixed;
+            width: 0;
+      }
+      input[type="radio"]:checked + label {
+            background-color: aqua;
+      }
+</style>
+<div class="quiz-card-container">
+      <form action="" method="post">
+            {% csrf_token %}
+            {% for item in content.questions %}
+            <div class="Quiz-card">
+                  <div class="btn btn-info" id="btn{{forloop.counter}}" style="margin-bottom: 1rem;">
+                        {{forloop.counter}}
+                  </div>
+                  <h5>{{item.qus}}</h5>
+                  <div class="container-fluid">
+                        <div class="row options">A : {{item.opta}}</div>
+                        <div class="row options">B : {{item.optb}}</div>
+                        <div class="row options">C : {{item.optc}} </div>
+                        <div class="row options">D : {{item.optd}}</div>
+                  </div>
+                  <div class="radio-toolbar">
+                        <input type="radio" id="A{{forloop.counter}}" name='answer{{forloop.counter}}' value="a" required>
+                        <label for="A{{forloop.counter}}" class="btn btn-outline-info">A </label>
+                        <input type="radio" id="B{{forloop.counter}}" name='answer{{forloop.counter}}' value="b" required>
+                        <label for="B{{forloop.counter}}" class="btn btn-outline-info" >B </label>
+                        <input type="radio" id="C{{forloop.counter}}" name='answer{{forloop.counter}}' value="c" required>
+                        <label for="C{{forloop.counter}}" class="btn btn-outline-info" >C </label>
+                        <input type="radio" id="D{{forloop.counter}}" name='answer{{forloop.counter}}' value="d" required>
+                        <label for="D{{forloop.counter}}" class="btn btn-outline-info" >D </label>                 
+                  
+                  </div>
+            </div>
+            {% endfor %}
+            <div class="row">
+            <input type="submit" class="btn btn-outline-success" value="Submit">
+            </div>
+      </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.js" 
+          integrity="sha256-QWo7LDxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
+            crossorigin="anonymous"></script>
+{% endblock %}

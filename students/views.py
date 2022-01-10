@@ -3,9 +3,10 @@ from django.http import HttpResponse, request
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth 
 from django.contrib import messages
+from django.db.models import Q
 from accounts.models import userprofile, contact, Quality
 from course import models
-from .models import StdOverview, skilsNcourse, completed
+from .models import StdOverview, skilsNcourse, completed, studentScore
 
 # Create your views here.
 def dashboard(request):
@@ -129,35 +130,10 @@ def userdata(username):
     user = userprofile.objects.get(pk=username)
     return(user)
 
-
-
 def course_search(request):
     keyword = request.GET["keyword"].lower()
-    if request.GET["type"] == "1" :
-        if models.course.objects.filter(course_id=keyword).exists():
-            data = models.course.objects.get(pk=keyword)
-            teacher = data.teacher_id
-            teacher_pro = userprofile.objects.get(pk=teacher)
-            return render(request,'std_course.html',{"data":data,"teacher":teacher_pro})
-        else:
-            messages.error(request, "no course with this ID")
-            return redirect("/st/course")
-    if request.GET["type"] == "2" :
-        if models.course.objects.filter(name=keyword).exists():
-            data = models.course.objects.get(name=keyword)
-            return HttpResponse(data.discriptions)
-        else:
-            messages.error(request, "no course with this name")
-            return redirect("/st/course")
-    if request.GET["type"] == "3" :
-        if models.course.objects.filter(name=keyword).exists():
-            data = models.course.objects.get(name=keyword)
-            return HttpResponse(data.discriptions)
-        else:
-            messages.error(request, "no course with this keyword")
-            return redirect("/st/course")
-
-    return HttpResponse(keyword)
+    data = models.course.objects.filter(Q(name__icontains= keyword) | Q(course_id=keyword) | Q(skils__icontains = keyword) )
+    return render(request,'std_course.html',{"content":data})
 
 def course_preview(request,course_id):
     if request.method =="POST":
@@ -197,15 +173,29 @@ def Weeks_view(request,course_id):
     cmplt = completed.objects.get(stud_id=user,course_id=course_id)
     cmplt_weeks = cmplt.completed_weeks
     cour_week = models.weeks.objects.get(pk=course_id)
-    if len(cmplt_weeks)==0:
+    if cmplt.completed == True:
+        return HttpResponse(cmplt.completed)
+    elif len(cmplt_weeks)==0:
         active_week = cour_week.week[0]
         acw=0
     else:
         count=0
-        for item in cour_week.week:
+        for item in cour_week.week: 
             if cmplt_weeks[-1] ==item:
                 if cour_week.week[-1]==item:
-                    pass
+                    contents= models.contentOrder.objects.get(pk=item["week_id"]) 
+                    if len(cmplt_weeks)==len(contents.order):
+                        cmplt.completed=True
+                        cmplt.save()
+                        return HttpResponse("Course completed")
+                    else:
+                        c=0
+                        for i in cour_week.week:
+                            data = models.contentOrder.objects.get(pk=i['week_id'])
+                            for j in data.order :
+                                if j not in cmplt.completed_content:
+                                    return redirect(f"/st/ls/{course_id}/{c}/{j}")
+                                    c=c+1
                 else:
                     active_week = cour_week.week[count+1]
                     acw=count+1
@@ -230,39 +220,85 @@ def Weeks_view(request,course_id):
 
 
 def lesson(request,course_id,week,cont):
-    cour_week = models.weeks.objects.get(pk=course_id)
-    active_week = cour_week.week[week]
-    order = models.contentOrder.objects.get(pk=active_week["week_id"])
-    if cont.endswith("T"):
-        content = models.text_content.objects.get(pk=cont)
-        return render(
-            request,
-            "text_content.html",
-            {
-                "content":content,
-                "order":order,
-                "week":active_week
+    if request.method == 'POST':
+        if cont.endswith("Q"):
+            content = models.Quiz.objects.get(pk=cont)
+            answers =[]
+            user_answer=[]
+            for question in content.questions:
+                answers.append(question["ans"])
+            for item in request.POST:
+                if item !="csrfmiddlewaretoken":
+                    user_answer.append(request.POST[item])
+            total_mark = 0
+            for i in range(len(answers)):
+                if user_answer[i] == answers[i]:
+                    total_mark+=content.questions[i]["m"]
+            if studentScore.objects.filter(course_id=course_id,stud_id = request.user.username ).exists():
+                pass
+            else:
+                score = studentScore(course_id=course_id,stud_id = request.user.username).save()
+            score = studentScore.objects.get(course_id=course_id,stud_id = request.user.username)
+            for item in score.exam:
+                if item["content_id"] == cont:
+                    score.exam.remove(item)
+                    score.save()
+            passed = False
+            messages = "Faild"
+            if total_mark >= content.to_pass:
+                passed = True
+                messages = "Passed"
+            exam = {"content_id":cont,
+                    "mark" : total_mark,
+                    "status" : passed
+                    }
+            score.exam.append(exam)
+            score.save()
+        return HttpResponse(f" you are scored {total_mark} <br> statuse {messages}")
+    else:
+        cour_week = models.weeks.objects.get(pk=course_id)
+        active_week = cour_week.week[week]
+        order = models.contentOrder.objects.get(pk=active_week["week_id"])
+        if cont.endswith("T"):
+            content = models.text_content.objects.get(pk=cont)
+            return render(
+                request,
+                "text_content.html",
+                {
+                    "content":content,
+                    "order":order,
+                    "weeks":cour_week.week
+                    })
+        elif cont.endswith("I"):
+            content = models.img_content.objects.get(pk=cont)
+            return render(
+                request,
+                "image_content.html",
+                {
+                    "content":content,
+                    "order":order,
+                    "weeks":cour_week.week               })
+        elif cont.endswith("V"):
+            content = models.Videos.objects.get(pk=cont)
+            return render(
+                request,
+                "video_content.html",
+                {
+                    "content":content,
+                    "order":order,
+                    "weeks":cour_week.week
                 })
-    elif cont.endswith("I"):
-        content = models.img_content.objects.get(pk=cont)
-        return render(
-            request,
-            "image_content.html",
-            {
-                "content":content,
-                "order":order,
-                "week":active_week
-                })
-    elif cont.endswith("V"):
-        content = models.Videos.objects.get(pk=cont)
-        return render(
-            request,
-            "video_content.html",
-            {
-                "content":content,
-                "order":order,
-                "week":active_week
-            })
+        elif cont.endswith("Q"):
+            content = models.Quiz.objects.get(pk=cont)
+            return render(
+                request,
+                "quiz_content.html",
+                {
+                    "content":content,
+                    "order":order,
+                    "weeks":cour_week.week
+                }
+            )
 def choice(request,course_id,cont,week,choice):
     if choice==1:
         user = request.user.username
@@ -275,7 +311,7 @@ def choice(request,course_id,cont,week,choice):
             std_view= StdOverview.objects.get(std_id=user,cour_id=course_id)
             std_view.progress={"last":cont}
             std_view.save()
-            messages.error(request,"Marked as finished")
+            messages.info(request,"Marked as finished")
             return redirect(f"/st/ls/{course_id}/{week}/{cont}")
         else:
             messages.error(request,"alredy finished go for next topic")

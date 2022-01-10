@@ -2,6 +2,12 @@
   {% block content %}
     {% load static %}
 <style>
+  .week-list{
+    min-height :30px;
+    display:block;
+    align-content: center;
+    padding:2rem ;
+  }
   .week_container {
     padding-top: 2rem;
     max-height: 100vh;
@@ -45,6 +51,11 @@
         box-shadow: 1px 1px #888888;
       }
 </style>
+<div class="row week-list">
+  {% for week in weeks %}
+    <div class="col-md-2 btn btn-outline-info" onclick="week_content({{forloop.counter}})"> week {{forloop.counter}}</div>
+  {% endfor %}
+</div>
 <div class="week_container">
   <div class="row">
   <div class="content_container col-10 col-md-9">
@@ -78,6 +89,16 @@
 <script>
   function option(n){
     window.location=  window.location.href+'/'+n;
+  }
+  function week_content(id){ 
+    id=id-1;
+    const url = new URL(window.location.href);
+    path = url.pathname
+    const path_components= path.split("/");
+    cours_id = path_components[3]
+    content = path_components[5]
+    window.location = path_components[0]+"/"+path_components[1]+"/"+path_components[2]+"/"+cours_id+"/"+id+"/"+content;
+    console.log(cours_id)
   }
 </script>
     {% endblock %}

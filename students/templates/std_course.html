@@ -29,12 +29,6 @@
         <div class="container-fluid">
           <a class="navbar-brand"><h2>Course Dashboard</h2></a>
           <form class="d-flex" action="/st/course/search" method="get">
-            <div class="col col-md-2">
-              <select class="form-select" name="type" id="inputGroupSelect01">
-                <option value="1">ID</option>
-                <option value="2">Name</option>
-                <option value="3">keyword</option>
-              </select></div>
             <input class="form-control me-2" type="search" name="keyword" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
@@ -48,7 +42,8 @@
       {% endfor %}
       {% endif %}
     
-      {% if data %}
+      {% if content %}
+      {% for item in content %}
       <div class="container table-div">
       <table class="table table-hover">
         <tr>
@@ -58,16 +53,17 @@
         <th class="table-warning">Time to complet</th>
         <th class="table-warning">Totel Enroled</th>
         <th class="table-warning">Rating</th></tr>
-        <tr onclick="Course_view({{data.course_id}})">
-          <td>{{data.course_id}}</td>
-          <td>{{data.name}}</td>
-          <td>{{teacher.full_name}}</td>
-          <td>{{data.time}}</td>
-          <td>{{data.enroled}}</td>
-          <td>{{data.rating}}</td>
+        <tr onclick="Course_view({{item.course_id}})">
+          <td>{{item.course_id}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.teacher_id}}</td>
+          <td>{{item.time}}</td>
+          <td>{{item.enroled}}</td>
+          <td>{{item.rating}}</td>
 
         </tr>
       </table></div>
+      {% endfor %}
       {% endif %}
     
     </div>
